@@ -60,7 +60,7 @@ export const useAuth = () => {
     return () => subscription.unsubscribe();
   }, []);
 
-  // Get main account user ID
+  // Get main account user ID (opcional - não crítico)
   const getMainAccountUserId = useCallback(async () => {
     if (!user) return;
 
@@ -69,10 +69,23 @@ export const useAuth = () => {
         user_id: user.id,
       });
 
-      if (error) throw error;
-      setMainAccountUserId(data);
-    } catch (error) {
-      console.error("Erro ao buscar user_id da conta principal:", error);
+      if (error) {
+        // Se a função não existir, silenciosamente falhar sem bloquear o app
+        if (error.code === 'PGRST202' || error.message.includes('does not exist')) {
+          console.log("ℹ️ Função get_main_account_user_id não disponível - usando user_id padrão");
+          setMainAccountUserId(user.id);
+          return;
+        }
+        throw error;
+      }
+      setMainAccountUserId(data || user.id);
+    } catch (error: any) {
+      // Log apenas em desenvolvimento, não bloqueia o funcionamento
+      if (process.env.NODE_ENV === 'development') {
+        console.warn("⚠️ Aviso: não foi possível buscar user_id da conta principal, usando user_id atual:", error.message);
+      }
+      // Usar o próprio user_id como fallback
+      setMainAccountUserId(user.id);
     }
   }, [user]);
 
