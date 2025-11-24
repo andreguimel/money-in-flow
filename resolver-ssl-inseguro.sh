@@ -78,7 +78,7 @@ docker run -d \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
   -v traefik-certificates:/certificates \
   --label "traefik.enable=true" \
-  traefik:v3.0 \
+  traefik:v3.4 \
   --api.dashboard=true \
   --api.insecure=true \
   --providers.docker=true \
