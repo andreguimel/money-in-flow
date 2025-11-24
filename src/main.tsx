@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
+import "./styles/dark-text-overrides.css";
 // Importar correção de WebSocket para HTTPS
 import "./utils/websocket-fix";
 import { ThemeProvider } from "./components/ThemeProvider";
