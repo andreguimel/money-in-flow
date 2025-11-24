@@ -1,7 +1,7 @@
 import { createFunctionLogger } from "./logger.ts";
 import { mercadoPagoAPICall, parseJSONWithRetry } from "./retry.ts";
 import { subscriptionCache, getCacheKey } from "./cache.ts";
-import { getAllPlans, getPlan } from "./subscription-plans.ts";
+import { getAllPlans, getPlan, type SubscriptionPlan } from "./subscription-plans.ts";
 import { createAnalyticsTracker } from "./analytics.ts";
 
 const logger = createFunctionLogger("subscription-management");
@@ -117,7 +117,7 @@ export class SubscriptionManager {
         {
           id: currentSubscription.stripe_customer_id,
           plan: newPlan.id,
-          amount: newPlan.price,
+          amount: newPlan.amount,
           currency: newPlan.currency,
           previous_plan: currentPlan.id,
           proration_amount: proration?.netAmount || 0,
@@ -151,8 +151,8 @@ export class SubscriptionManager {
   }
 
   private calculateProration(
-    currentPlan: any,
-    newPlan: any,
+    currentPlan: SubscriptionPlan,
+    newPlan: SubscriptionPlan,
     subscription: any
   ): ProrationCalculation {
     const now = new Date();
@@ -170,16 +170,16 @@ export class SubscriptionManager {
     const remainingDays = Math.max(0, totalDays - usedDays);
 
     // Calculate refund for unused portion of current plan
-    const refundAmount = (currentPlan.price / totalDays) * remainingDays;
+    const refundAmount = (currentPlan.amount / totalDays) * remainingDays;
 
     // Calculate charge for new plan (prorated for remaining period)
-    const chargeAmount = (newPlan.price / totalDays) * remainingDays;
+    const chargeAmount = (newPlan.amount / totalDays) * remainingDays;
 
     const netAmount = chargeAmount - refundAmount;
 
     return {
-      currentPlanAmount: currentPlan.price,
-      newPlanAmount: newPlan.price,
+      currentPlanAmount: currentPlan.amount,
+      newPlanAmount: newPlan.amount,
       daysUsed: usedDays,
       daysTotal: totalDays,
       refundAmount,
@@ -194,7 +194,7 @@ export class SubscriptionManager {
     proration: ProrationCalculation | null
   ): Promise<any> {
     const { userId, newPlanId, prorationMode } = request;
-    const newPlan = getSubscriptionPlan(newPlanId);
+    const newPlan = getPlan(newPlanId);
 
     try {
       // For immediate upgrades, process payment for the difference
@@ -272,7 +272,7 @@ export class SubscriptionManager {
     proration: ProrationCalculation | null
   ): Promise<any> {
     const { userId, newPlanId, prorationMode } = request;
-    const newPlan = getSubscriptionPlan(newPlanId);
+    const newPlan = getPlan(newPlanId);
 
     try {
       // For downgrades, we typically don't process immediate changes
@@ -495,7 +495,7 @@ export class SubscriptionManager {
 
   private async applyPendingPlanChange(subscription: any): Promise<void> {
     try {
-      const newPlan = getSubscriptionPlan(subscription.pending_plan_change);
+      const newPlan = getPlan(subscription.pending_plan_change);
       if (!newPlan) {
         logger.warn(
           "Invalid pending plan change",
@@ -532,9 +532,9 @@ export class SubscriptionManager {
       );
 
       // Track the change
-      const currentPlan = getSubscriptionPlan(subscription.plan_id);
+      const currentPlan = getPlan(subscription.plan_id);
       const changeType =
-        newPlan.price > (currentPlan?.price || 0) ? "upgrade" : "downgrade";
+        newPlan.amount > (currentPlan?.amount || 0) ? "upgrade" : "downgrade";
 
       await this.analyticsTracker.trackSubscriptionEvent(
         changeType === "upgrade"
@@ -544,7 +544,7 @@ export class SubscriptionManager {
         {
           id: subscription.stripe_customer_id,
           plan: newPlan.id,
-          amount: newPlan.price,
+          amount: newPlan.amount,
           currency: newPlan.currency,
           previous_plan: subscription.plan_id,
         }
@@ -571,7 +571,7 @@ export class SubscriptionManager {
     }
   }
 
-  async getAvailableUpgrades(userId: string): Promise<any[]> {
+  async getAvailableUpgrades(userId: string): Promise<SubscriptionPlan[]> {
     try {
       const { data: subscription } = await this.supabaseClient
         .from("subscribers")
@@ -579,18 +579,20 @@ export class SubscriptionManager {
         .eq("user_id", userId)
         .single();
 
+      const allPlans = getAllPlans();
+
       if (!subscription) {
-        return SUBSCRIPTION_PLANS.filter((plan) => plan.id !== "free");
+        return allPlans;
       }
 
-      const currentPlan = getSubscriptionPlan(subscription.plan_id);
+      const currentPlan = getPlan(subscription.plan_id);
       if (!currentPlan) {
-        return SUBSCRIPTION_PLANS.filter((plan) => plan.id !== "free");
+        return allPlans;
       }
 
       // Return plans with higher price
-      return SUBSCRIPTION_PLANS.filter(
-        (plan) => plan.price > currentPlan.price && plan.id !== currentPlan.id
+      return allPlans.filter(
+        (plan: SubscriptionPlan) => plan.amount > currentPlan.amount && plan.id !== currentPlan.id
       );
     } catch (error) {
       logger.error(
@@ -605,7 +607,7 @@ export class SubscriptionManager {
     }
   }
 
-  async getAvailableDowngrades(userId: string): Promise<any[]> {
+  async getAvailableDowngrades(userId: string): Promise<SubscriptionPlan[]> {
     try {
       const { data: subscription } = await this.supabaseClient
         .from("subscribers")
@@ -617,14 +619,14 @@ export class SubscriptionManager {
         return [];
       }
 
-      const currentPlan = getSubscriptionPlan(subscription.plan_id);
+      const currentPlan = getPlan(subscription.plan_id);
       if (!currentPlan) {
-        return SUBSCRIPTION_PLANS.filter((plan) => plan.id === "free");
+        return [];
       }
 
       // Return plans with lower or equal price
-      return SUBSCRIPTION_PLANS.filter(
-        (plan) => plan.price <= currentPlan.price && plan.id !== currentPlan.id
+      return getAllPlans().filter(
+        (plan: SubscriptionPlan) => plan.amount <= currentPlan.amount && plan.id !== currentPlan.id
       );
     } catch (error) {
       logger.error(

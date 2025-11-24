@@ -184,7 +184,7 @@ serve(async (req) => {
     console.error("❌ Erro no cancelamento:", error);
     return new Response(
       JSON.stringify({
-        error: error.message,
+        error: error instanceof Error ? error.message : String(error),
         details: "Erro ao cancelar assinatura",
       }),
       {

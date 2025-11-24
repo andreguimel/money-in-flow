@@ -57,7 +57,7 @@ serve(async (req) => {
         }
       } catch (error) {
         console.error("Erro ao deletar da tabela dividas:", error);
-        errors.push(`Erro na tabela dividas: ${error.message}`);
+        errors.push(`Erro na tabela dividas: ${error instanceof Error ? error.message : String(error)}`);
       }
     } else {
       // Para despesas e receitas, deletar das tabelas principais e transacoes
@@ -82,7 +82,7 @@ serve(async (req) => {
         }
       } catch (error) {
         console.error(`Erro ao deletar da tabela ${tableName}:`, error);
-        errors.push(`Erro na tabela ${tableName}: ${error.message}`);
+        errors.push(`Erro na tabela ${tableName}: ${error instanceof Error ? error.message : String(error)}`);
       }
 
       // Deletar da tabela transacoes
@@ -110,7 +110,7 @@ serve(async (req) => {
         }
       } catch (error) {
         console.error("Erro ao deletar da tabela transacoes:", error);
-        errors.push(`Erro na tabela transacoes: ${error.message}`);
+        errors.push(`Erro na tabela transacoes: ${error instanceof Error ? error.message : String(error)}`);
       }
     }
 
@@ -138,7 +138,7 @@ serve(async (req) => {
     console.error("Erro na função:", error);
     return new Response(
       JSON.stringify({
-        error: error.message,
+        error: error instanceof Error ? error.message : String(error),
         success: false,
       }),
       {
