@@ -1,0 +1,86 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - VITE_SUPABASE_PROJECT_ID=ponxumxwjodpgwhepwxc
+        - VITE_SUPABASE_PUBLISHABLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvbnh1bXh3am9kcGd3aGVwd3hjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU0NTE4NTIsImV4cCI6MjA3MTAyNzg1Mn0.J43LGwbU8tQ8_xe3ua4ddb-HTFLsWXoR7R1MVIS3SdE
+        - VITE_SUPABASE_URL=https://ponxumxwjodpgwhepwxc.supabase.co
+        - VITE_ALLOW_TRIALS=true
+        - VITE_APP_URL=https://mdinheiro.com.br
+    container_name: meu-dinheiro-app
+    restart: unless-stopped
+    networks:
+      - traefik-network
+    
+    # Configurações de recursos otimizadas
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.5'
+        reservations:
+          memory: 256M
+          cpus: '0.25'
+    
+    # Configurações de logging otimizadas
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    
+    labels:
+      # Traefik configuration
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik-network"
+      
+      # HTTP to HTTPS redirect
+      - "traefik.http.routers.app-http.rule=Host(`mdinheiro.com.br`) || Host(`www.mdinheiro.com.br`)"
+      - "traefik.http.routers.app-http.entrypoints=web"
+      - "traefik.http.routers.app-http.middlewares=redirect-to-https"
+      
+      # HTTPS configuration
+      - "traefik.http.routers.app-https.rule=Host(`mdinheiro.com.br`) || Host(`www.mdinheiro.com.br`)"
+      - "traefik.http.routers.app-https.entrypoints=websecure"
+      - "traefik.http.routers.app-https.tls=true"
+      - "traefik.http.routers.app-https.tls.certresolver=letsencrypt"
+      
+      # Service configuration
+      - "traefik.http.services.app.loadbalancer.server.port=80"
+      
+      # Middlewares
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true"
+      
+      # Security headers middleware
+      - "traefik.http.middlewares.security-headers.headers.frameDeny=true"
+      - "traefik.http.middlewares.security-headers.headers.contentTypeNosniff=true"
+      - "traefik.http.middlewares.security-headers.headers.browserXssFilter=true"
+      - "traefik.http.middlewares.security-headers.headers.referrerPolicy=strict-origin-when-cross-origin"
+      - "traefik.http.middlewares.security-headers.headers.forceSTSHeader=true"
+      - "traefik.http.middlewares.security-headers.headers.stsSeconds=31536000"
+      - "traefik.http.middlewares.security-headers.headers.stsIncludeSubdomains=true"
+      - "traefik.http.middlewares.security-headers.headers.stsPreload=true"
+      
+      # Middleware para iPhone/Safari
+      - "traefik.http.middlewares.iphone-headers.headers.customResponseHeaders.X-UA-Compatible=IE=edge,chrome=1"
+      - "traefik.http.middlewares.iphone-headers.headers.customResponseHeaders.X-iPhone-Optimized=true"
+      
+      # Apply middlewares to HTTPS route
+      - "traefik.http.routers.app-https.middlewares=security-headers,iphone-headers"
+    
+    # Healthcheck otimizado
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+networks:
+  traefik-network:
+    external: true

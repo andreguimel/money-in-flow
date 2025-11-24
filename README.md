@@ -1,73 +1,220 @@
-# Welcome to your Lovable project
+# 🏦 Meu Dinheiro - Controle Financeiro Inteligente
 
-## Project info
+> **Gerencie suas finanças de forma simples e inteligente com dashboard intuitivo, relatórios detalhados e assistente integrado.**
 
-**URL**: https://lovable.dev/projects/1535c6a5-04f0-45c6-be44-08050c66fafc
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
-## How can I edit this code?
+## 📖 Sobre o Projeto
 
-There are several ways of editing your application.
+O **Meu Dinheiro** é uma aplicação web moderna para controle financeiro pessoal e empresarial, desenvolvida com foco na simplicidade e eficiência. Com interface intuitiva e recursos avançados, oferece uma solução completa para gestão de finanças.
 
-**Use Lovable**
+### 🎯 Objetivos
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/1535c6a5-04f0-45c6-be44-08050c66fafc) and start prompting.
+- Simplificar o controle financeiro diário
+- Fornecer insights através de relatórios detalhados
+- Centralizar todas as informações financeiras em um só lugar
+- Oferecer experiência de usuário excepcional
 
-Changes made via Lovable will be committed automatically to this repo.
+## ✨ Funcionalidades
 
-**Use your preferred IDE**
+### 💰 **Gestão Financeira Core**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- **Dashboard Interativo** - Visão geral das finanças em tempo real
+- **Receitas & Despesas** - Controle completo de entradas e saídas
+- **Categorização Inteligente** - Organize suas transações por categorias personalizáveis
+- **Gestão de Dívidas** - Acompanhe e controle seus compromissos financeiros
+- **Metas Financeiras** - Defina e monitore objetivos financeiros
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### 📊 **Relatórios e Análises**
 
-Follow these steps:
+- **Relatórios Detalhados** - Análises profundas do comportamento financeiro
+- **Dashboard Empresarial** - Métricas específicas para negócios
+- **Visualizações Gráficas** - Gráficos e charts informativos
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### 🚗 **Gestão de Veículos** (Diferencial)
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+- **Controle de Quilometragem** - Monitore o uso dos seus veículos
+- **Manutenções Programadas** - Gerencie tipos de manutenção personalizáveis
+- **Custos Operacionais** - Acompanhe gastos relacionados aos veículos
 
-# Step 3: Install the necessary dependencies.
-npm i
+### 🛒 **Recursos Adicionais**
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+- **Lista de Mercado** - Planeje suas compras
+- **Integração com IA** - Assistente inteligente para insights financeiros
+- **Sistema de Autenticação** - Login seguro com gestão de perfil
+- **Interface Responsiva** - Acesso completo em dispositivos móveis
+
+## 🛠️ Tecnologias Utilizadas
+
+### **Frontend**
+
+- **React 18** - Biblioteca para interfaces de usuário
+- **TypeScript** - Superset JavaScript com tipagem estática
+- **Vite** - Build tool rápida e moderna
+- **Tailwind CSS** - Framework CSS utility-first
+- **shadcn/ui** - Componentes de UI modernos e acessíveis
+
+### **Ferramentas de Desenvolvimento**
+
+- **ESLint** - Linting de código
+- **PostCSS** - Processamento de CSS
+- **React Hooks** - Gerenciamento de estado e efeitos
+- **Lucide React** - Ícones modernos
+
+## 📁 Estrutura do Projeto
+
+```
+as-mordomo/
+├── public/                 # Arquivos estáticos
+│   ├── favicon.ico
+│   └── lovable-uploads/   # Assets do projeto
+├── src/
+│   ├── components/        # Componentes React
+│   │   ├── auth/         # Componentes de autenticação
+│   │   ├── ui/           # Componentes base (shadcn/ui)
+│   │   └── [modais]      # Modais específicos do domínio
+│   ├── pages/            # Páginas da aplicação
+│   │   ├── Dashboard.tsx
+│   │   ├── Receitas.tsx
+│   │   ├── Despesas.tsx
+│   │   ├── Veiculos.tsx
+│   │   └── [...]
+│   ├── hooks/            # Hooks customizados
+│   ├── lib/              # Utilitários e helpers
+│   └── [arquivos base]
+├── [arquivos de configuração]
+└── README.md
 ```
 
-**Edit a file directly in GitHub**
+## 🚀 Como Executar
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### **Pré-requisitos**
 
-**Use GitHub Codespaces**
+- Node.js 18+ instalado
+- npm ou yarn
+- Git
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### **Instalação**
 
-## What technologies are used for this project?
+1. **Clone o repositório**
 
-This project is built with:
+```bash
+git clone [https://github.com/URL-DO-SEU-REPOSITORIO/mordomo.git]
+cd mordomo-main
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+2. **Instale as dependências**
 
-## How can I deploy this project?
+```bash
+npm install
+# ou
+yarn install
+```
 
-Simply open [Lovable](https://lovable.dev/projects/1535c6a5-04f0-45c6-be44-08050c66fafc) and click on Share -> Publish.
+3. **Execute em modo de desenvolvimento**
 
-## Can I connect a custom domain to my Lovable project?
+```bash
+npm run dev
+# ou
+yarn dev
+```
 
-Yes, you can!
+4. **Acesse a aplicação**
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+```
+http://localhost:8080
+```
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+### **Scripts Disponíveis**
+
+```bash
+npm run dev          # Executa em modo desenvolvimento
+npm run build        # Build para produção
+npm run preview      # Preview do build de produção
+npm run lint         # Executa o linting do código
+```
+
+## ⚙️ Configuração
+
+### **Variáveis de Ambiente**
+
+Crie um arquivo `.env.local` na raiz do projeto:
+
+```env
+# Configurações da aplicação
+VITE_APP_NAME=Mordomo
+VITE_API_URL=http://localhost:3000/api
+
+# Configurações de terceiros (se aplicável)
+VITE_ANALYTICS_ID=your_analytics_id
+```
+
+### **Personalização de Tema**
+
+O projeto utiliza CSS Variables para temas. Edite em `src/index.css`:
+
+```css
+:root {
+  --primary: 222.2 84% 4.9%;
+  --secondary: 210 40% 95%;
+  /* ... outras variáveis */
+}
+```
+
+## 🔧 Desenvolvimento
+
+### **Estrutura de Componentes**
+
+```typescript
+// Exemplo de componente tipado
+interface ComponenteProps {
+  titulo: string;
+  valor?: number;
+  onAction: () => void;
+}
+
+export function MeuComponente({ titulo, valor, onAction }: ComponenteProps) {
+  return (
+    <div className="p-4 border rounded-lg">
+      <h3 className="text-lg font-semibold">{titulo}</h3>
+      {valor && <p className="text-2xl">{valor}</p>}
+      <button onClick={onAction}>Ação</button>
+    </div>
+  );
+}
+```
+
+### **Boas Práticas**
+
+- ✅ Sempre use TypeScript com tipagem explícita
+- ✅ Componentes funcionais com hooks
+- ✅ Nomeação clara e descritiva
+- ✅ Arquivos pequenos e focados (máximo 200 linhas)
+- ✅ Comentários explicativos em lógicas complexas
+
+## 📊 Performance
+
+- **Build otimizado** com Vite
+- **Tree shaking** automático
+- **Lazy loading** de componentes não críticos
+- **CSS otimizado** com Tailwind CSS purge
+- **Imagens otimizadas** com WebP quando possível
+
+## 👨‍💻 Autor
+
+**Equipe Mordomo**
+
+- 🌐 Website: [clubdosoftware.com.br](https://clubdosoftware.com.br)
+
+---
+
+<div align="center">
+
+**Feito com ❤️ para simplificar sua vida financeira**
+
+[🏠 Home](https://clubdosoftware.com.br) • [📚 Docs](https://clubdosoftware.com.br/mordomo.html)
+
+</div>
