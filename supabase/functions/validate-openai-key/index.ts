@@ -98,7 +98,7 @@ serve(async (req) => {
       });
 
     } catch (apiError) {
-      logStep('OpenAI API test failed', { error: apiError.message });
+      logStep('OpenAI API test failed', { error: apiError instanceof Error ? apiError.message : String(apiError) });
       
       return new Response(JSON.stringify({ 
         valid: false, 
@@ -109,11 +109,11 @@ serve(async (req) => {
     }
 
   } catch (error) {
-    logStep('Error in validate-openai-key function', { error: error.message });
+    logStep('Error in validate-openai-key function', { error: error instanceof Error ? error.message : String(error) });
     
     return new Response(JSON.stringify({ 
       valid: false, 
-      error: error.message 
+      error: error instanceof Error ? error.message : String(error)
     }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },

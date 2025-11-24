@@ -124,11 +124,11 @@ serve(async (req) => {
     });
 
   } catch (error) {
-    logStep('Error in find-user-by-email function', { error: error.message });
+    logStep('Error in find-user-by-email function', { error: error instanceof Error ? error.message : String(error) });
     
     return new Response(JSON.stringify({ 
       found: false, 
-      message: error.message 
+      message: error instanceof Error ? error.message : String(error)
     }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },

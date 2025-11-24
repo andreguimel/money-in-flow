@@ -113,11 +113,11 @@ export class AnalyticsTracker {
         .lte("timestamp", endDate.toISOString());
 
       const successfulPayments =
-        events?.filter((e) => e.event_type === "payment_succeeded") || [];
+        events?.filter((e: any) => e.event_type === "payment_succeeded") || [];
       const failedPayments =
-        events?.filter((e) => e.event_type === "payment_failed") || [];
+        events?.filter((e: any) => e.event_type === "payment_failed") || [];
 
-      const totalRevenue = successfulPayments.reduce((sum, payment) => {
+      const totalRevenue = successfulPayments.reduce((sum: number, payment: any) => {
         return sum + (payment.properties?.amount || 0);
       }, 0);
 
@@ -141,10 +141,10 @@ export class AnalyticsTracker {
         .lte("timestamp", endDate.toISOString());
 
       const newSubscriptions =
-        subscriptions?.filter((s) => s.event_type === "subscription_created")
+        subscriptions?.filter((s: any) => s.event_type === "subscription_created")
           .length || 0;
       const cancelledSubscriptions =
-        subscriptions?.filter((s) => s.event_type === "subscription_cancelled")
+        subscriptions?.filter((s: any) => s.event_type === "subscription_cancelled")
           .length || 0;
 
       const churnRate =
@@ -189,16 +189,16 @@ export class AnalyticsTracker {
         .lte("timestamp", endDate.toISOString());
 
       const newSubscriptions =
-        events?.filter((e) => e.event_type === "subscription_created").length ||
+        events?.filter((e: any) => e.event_type === "subscription_created").length ||
         0;
       const cancelledSubscriptions =
-        events?.filter((e) => e.event_type === "subscription_cancelled")
+        events?.filter((e: any) => e.event_type === "subscription_cancelled")
           .length || 0;
       const upgrades =
-        events?.filter((e) => e.event_type === "subscription_upgraded")
+        events?.filter((e: any) => e.event_type === "subscription_upgraded")
           .length || 0;
       const downgrades =
-        events?.filter((e) => e.event_type === "subscription_downgraded")
+        events?.filter((e: any) => e.event_type === "subscription_downgraded")
           .length || 0;
 
       // Get current active subscriptions
@@ -246,7 +246,7 @@ export class AnalyticsTracker {
 
       // Calculate feature usage
       const featuresUsed: Record<string, number> = {};
-      events?.forEach((event) => {
+      events?.forEach((event: any) => {
         if (event.event_type.startsWith("feature_")) {
           const feature = event.event_type.replace("feature_", "");
           featuresUsed[feature] = (featuresUsed[feature] || 0) + 1;
@@ -254,10 +254,10 @@ export class AnalyticsTracker {
       });
 
       // Calculate average session duration (simplified)
-      const sessionEvents = events?.filter((e) => e.session_id) || [];
+      const sessionEvents = events?.filter((e: any) => e.session_id) || [];
       const sessionDurations = new Map<string, { start: Date; end: Date }>();
 
-      sessionEvents.forEach((event) => {
+      sessionEvents.forEach((event: any) => {
         const sessionId = event.session_id!;
         const timestamp = new Date(event.timestamp);
 
@@ -282,7 +282,7 @@ export class AnalyticsTracker {
           : 0;
 
       // Calculate retention rate (simplified - would need more complex logic)
-      const uniqueUsers = new Set(events?.map((e) => e.user_id).filter(Boolean))
+      const uniqueUsers = new Set(events?.map((e: any) => e.user_id).filter(Boolean))
         .size;
       const retentionRate = uniqueUsers > 0 ? 0.85 : 0; // Placeholder
 

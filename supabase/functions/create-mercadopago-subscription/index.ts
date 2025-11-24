@@ -153,9 +153,9 @@ serve(async (req) => {
 
     // Check cache for existing preapproval
     const cacheKey = getCacheKey.preapproval(user.id);
-    const cachedPreapproval = subscriptionCache.get(cacheKey);
+    const cachedPreapproval = subscriptionCache.get(cacheKey) as any;
 
-    if (cachedPreapproval) {
+    if (cachedPreapproval && cachedPreapproval.id && cachedPreapproval.init_point) {
       logger.info(
         "Returning cached preapproval",
         { id: cachedPreapproval.id },
