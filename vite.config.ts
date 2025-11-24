@@ -31,6 +31,11 @@ export default defineConfig(({ mode }) => {
       target: 'esnext',
       sourcemap: true,
       rollupOptions: {
+        external: [
+          /.*\.test\.tsx?$/,
+          /.*\.spec\.tsx?$/,
+          /__tests__\/.*/,
+        ],
         output: {
           manualChunks: {
             vendor: ['react', 'react-dom', 'react-router-dom'],
