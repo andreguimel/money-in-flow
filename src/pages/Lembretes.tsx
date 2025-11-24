@@ -28,7 +28,7 @@ export const Lembretes = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [lembreteParaEditar, setLembreteParaEditar] = useState<Lembrete | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const [activeTab, setActiveTab] = useState("todos");
+  const [activeTab, setActiveTab] = useState("pendentes");
 
   useEffect(() => {
     refetch();
