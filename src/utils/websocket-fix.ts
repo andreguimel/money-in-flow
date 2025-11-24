@@ -29,6 +29,25 @@ export const fixWebSocketURL = (url: string): string => {
   return url;
 };
 
+// Classe WebSocket segura que força WSS em HTTPS
+export class SecureWebSocket extends WebSocket {
+  constructor(url: string | URL, protocols?: string | string[]) {
+    const isHTTPS = typeof window !== 'undefined' && window.location.protocol === 'https:';
+    let finalUrl = url.toString();
+    
+    // Forçar WSS se estamos em HTTPS
+    if (isHTTPS && finalUrl.startsWith('ws://')) {
+      finalUrl = finalUrl.replace('ws://', 'wss://');
+      console.log('🔒 WebSocket URL corrigida:', {
+        original: url.toString(),
+        fixed: finalUrl,
+      });
+    }
+    
+    super(finalUrl, protocols);
+  }
+}
+
 // Função para aplicar configurações seguras de WebSocket
 export const applySecureWebSocketConfig = () => {
   if (typeof window === 'undefined') return;
@@ -41,29 +60,18 @@ export const applySecureWebSocketConfig = () => {
     userAgent: navigator.userAgent.includes('iPhone') ? 'iPhone' : 'Other',
   });
   
+  // Substituir WebSocket global pela versão segura
+  if (isHTTPS) {
+    (window as any).WebSocket = SecureWebSocket;
+    console.log('✅ WebSocket global substituído por SecureWebSocket');
+  }
+  
   // Configurações globais para WebSocket seguro
   (window as any).__websocket_secure_config = {
     forceWSS: isHTTPS,
     protocol: isHTTPS ? 'wss:' : 'ws:',
     timestamp: new Date().toISOString(),
   };
-  
-  // Interceptar criação de WebSocket para forçar WSS em HTTPS
-  if (isHTTPS && window.WebSocket) {
-    const OriginalWebSocket = window.WebSocket;
-    
-    window.WebSocket = class extends OriginalWebSocket {
-      constructor(url: string | URL, protocols?: string | string[]) {
-        const fixedUrl = typeof url === 'string' ? fixWebSocketURL(url) : url;
-        console.log('🔌 WebSocket interceptado:', {
-          original: url.toString(),
-          fixed: fixedUrl.toString(),
-          isSecure: fixedUrl.toString().startsWith('wss://'),
-        });
-        super(fixedUrl, protocols);
-      }
-    } as any;
-  }
 };
 
 // Função para verificar se WebSocket está funcionando corretamente
