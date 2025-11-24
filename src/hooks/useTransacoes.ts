@@ -184,7 +184,7 @@ export const useTransacoes = () => {
 
       if (error) throw error;
       setTransacoes((prev) =>
-        prev.map((t) => (t.id === id ? { ...t, ...updatedData } : t))
+        prev.map((t) => (t.id === id ? { ...t, ...data } : t))
       );
 
       toast({

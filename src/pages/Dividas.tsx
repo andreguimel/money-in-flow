@@ -826,7 +826,7 @@ const Dividas = () => {
                       <Checkbox
                         id="avisos"
                         checked={avisosPagamento}
-                        onCheckedChange={setAvisosPagamento}
+                        onCheckedChange={(checked) => setAvisosPagamento(checked === true)}
                       />
                       <Label htmlFor="avisos">
                         Receber aviso de pagamento um dia antes do vencimento

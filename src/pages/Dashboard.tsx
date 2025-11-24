@@ -440,11 +440,6 @@ const Dashboard = () => {
                         <p className="text-xl md:text-2xl font-bold text-gray-900 dark:text-gray-100">
                           {stat.value}
                         </p>
-                        {stat.badge && (
-                          <span className="inline-block mt-2 px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full">
-                            {stat.badge}
-                          </span>
-                        )}
                       </div>
                       <div
                         className={`p-3 rounded-full bg-gray-50 ${stat.color}`}

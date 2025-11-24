@@ -100,9 +100,9 @@ export const LembreteCard = ({
 
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            {lembrete.categoria && (
+            {lembrete.categorias?.nome && (
               <Badge variant="outline" className="text-xs">
-                {lembrete.categoria}
+                {lembrete.categorias.nome}
               </Badge>
             )}
           </div>

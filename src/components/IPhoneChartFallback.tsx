@@ -21,10 +21,11 @@ interface IPhoneChartFallbackProps {
 }
 
 // Detectar se é iPhone físico
+// Detectar se é iPhone físico
 const isPhysicalIPhone = () => {
   const userAgent = navigator.userAgent;
   const isIPhone = /iPhone/.test(userAgent);
-  const isPhysicalDevice = !window.navigator.standalone && 
+  const isPhysicalDevice = !(navigator as any).standalone && 
                           !window.matchMedia('(display-mode: standalone)').matches &&
                           !/simulator|emulator/i.test(userAgent);
   return isIPhone && isPhysicalDevice;
