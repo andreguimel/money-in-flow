@@ -27,7 +27,6 @@ export function SubscriptionManagement() {
     error,
     checkSubscription,
     createCheckout,
-    openCustomerPortal,
   } = useSubscription();
   const [isCreatingCheckout, setIsCreatingCheckout] = useState(false);
 
@@ -115,21 +114,21 @@ export function SubscriptionManagement() {
   }
 
   const daysRemaining = calculateDaysRemaining(
-    subscriptionData.is_trial_period
-      ? subscriptionData.trial_end_date
-      : subscriptionData.next_billing_date
+    subscriptionData.trial_active
+      ? subscriptionData.trial_data.trial_end
+      : subscriptionData.current_period_end
   );
 
   const status = getSubscriptionStatus(
-    subscriptionData.is_active,
-    subscriptionData.is_trial_period,
+    subscriptionData.effective_subscription,
+    subscriptionData.trial_active,
     daysRemaining
   );
 
   const badgeVariant = getSubscriptionBadgeVariant(status);
   const badgeText = formatDaysRemaining(
     daysRemaining,
-    subscriptionData.is_trial_period
+    subscriptionData.trial_active
   );
 
   return (
@@ -150,46 +149,46 @@ export function SubscriptionManagement() {
             <Badge variant={badgeVariant}>{badgeText}</Badge>
           </div>
 
-          {subscriptionData.is_trial_period && (
+          {subscriptionData.trial_active && (
             <div className="flex items-center justify-between">
               <span className="text-sm font-medium">Período de Teste:</span>
               <span className="text-sm text-muted-foreground">
-                Até {formatDate(subscriptionData.trial_end_date)}
+                Até {formatDate(subscriptionData.trial_data.trial_end)}
               </span>
             </div>
           )}
 
-          {!subscriptionData.is_trial_period &&
-            subscriptionData.next_billing_date && (
+          {!subscriptionData.trial_active &&
+            subscriptionData.current_period_end && (
               <div className="flex items-center justify-between">
                 <span className="text-sm font-medium">Próximo Pagamento:</span>
                 <span className="text-sm text-muted-foreground">
-                  {formatDate(subscriptionData.next_billing_date)}
+                  {formatDate(subscriptionData.current_period_end)}
                 </span>
               </div>
             )}
 
-          {subscriptionData.plan_name && (
+          {subscriptionData.subscription_tier && (
             <div className="flex items-center justify-between">
               <span className="text-sm font-medium">Plano:</span>
               <span className="text-sm text-muted-foreground">
-                {subscriptionData.plan_name}
+                {subscriptionData.subscription_tier}
               </span>
             </div>
           )}
 
-          {subscriptionData.plan_price && (
+          {subscriptionData.amount && (
             <div className="flex items-center justify-between">
               <span className="text-sm font-medium">Valor:</span>
               <span className="text-sm text-muted-foreground">
-                {formatCurrency(subscriptionData.plan_price)}
+                {formatCurrency(subscriptionData.amount)}
               </span>
             </div>
           )}
 
           <div className="flex gap-2 pt-4">
             {/* Só mostra o botão de assinar se não estiver ativo */}
-            {!subscriptionData.is_active && (
+            {!subscriptionData.effective_subscription && (
               <Button
                 onClick={handleCreateCheckout}
                 disabled={isCreatingCheckout}
@@ -199,19 +198,6 @@ export function SubscriptionManagement() {
                 {isCreatingCheckout ? "Criando..." : "Assinar Premium"}
               </Button>
             )}
-
-            {/* Só mostra o botão de gerenciar se estiver ativo e não for trial */}
-            {subscriptionData.is_active &&
-              !subscriptionData.is_trial_period && (
-                <Button
-                  onClick={openCustomerPortal}
-                  variant="outline"
-                  className="flex-1"
-                >
-                  <CreditCard className="h-4 w-4 mr-2" />
-                  Gerenciar Assinatura
-                </Button>
-              )}
 
             <Button onClick={checkSubscription} variant="outline" size="icon">
               <RefreshCw className="h-4 w-4" />

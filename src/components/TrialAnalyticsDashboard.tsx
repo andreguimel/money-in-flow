@@ -263,6 +263,7 @@ export const TrialAnalyticsDashboard: React.FC = () => {
                     day: "2-digit",
                     month: "2-digit",
                   }),
+                  value: item.trials_created, // Required by NativeLineChart
                   trials_created: item.trials_created,
                   trials_accessed: item.trials_accessed,
                   trials_converted: item.trials_converted

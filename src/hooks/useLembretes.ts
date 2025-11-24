@@ -10,8 +10,14 @@ export interface Lembrete {
   data_lembrete: string;
   categoria_id?: string;
   concluido: boolean;
+  notificar?: boolean;
   created_at: string;
   updated_at: string;
+  categorias?: {
+    id: string;
+    nome: string;
+    cor?: string;
+  } | null;
 }
 
 export interface NovoLembrete {

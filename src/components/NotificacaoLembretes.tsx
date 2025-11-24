@@ -25,7 +25,7 @@ export const NotificacaoLembretes: React.FC<NotificacaoLembretesProps> = ({
   const getStatusColor = (diasRestantes: number) => {
     if (diasRestantes < 0) return 'destructive';
     if (diasRestantes === 0) return 'destructive';
-    if (diasRestantes === 1) return 'warning';
+    if (diasRestantes === 1) return 'secondary';
     return 'default';
   };
 
@@ -44,8 +44,8 @@ export const NotificacaoLembretes: React.FC<NotificacaoLembretesProps> = ({
   const getPrioridadeColor = (prioridade: string) => {
     switch (prioridade) {
       case 'alta': return 'destructive';
-      case 'media': return 'warning';
-      case 'baixa': return 'secondary';
+      case 'media': return 'secondary';
+      case 'baixa': return 'outline';
       default: return 'default';
     }
   };

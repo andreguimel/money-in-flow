@@ -38,6 +38,7 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { useCategorias } from "@/hooks/useCategorias";
 import { useReceitas } from "@/hooks/useReceitas";
+import type { Receita } from "@/hooks/useReceitas";
 import { useAuth } from "@/hooks/useAuth";
 import { useSharedUsers } from "@/hooks/useSharedUsers";
 import { useProfile } from "@/hooks/useProfile";
@@ -55,15 +56,6 @@ import {
   ItemCheckbox,
 } from "@/components/MultiSelectControls";
 import { MonthSelector } from "@/components/MonthSelector";
-
-interface Receita {
-  id: string;
-  descricao: string;
-  valor: number;
-  categoria: string;
-  data: string;
-  tipo: "fixa" | "variavel";
-}
 
 const Receitas = () => {
   const { toast } = useToast();
@@ -97,7 +89,7 @@ const Receitas = () => {
   const [anoFilter, setAnoFilter] = useState("");
 
   // Estados para o modal de edição
-  const [receitaEditando, setReceitaEditando] = useState<Receita | null>(null);
+  const [receitaEditando, setReceitaEditando] = useState<any>(null);
   const [modalEditarAberto, setModalEditarAberto] = useState(false);
 
   // Estados para seleção múltipla
@@ -171,21 +163,13 @@ const Receitas = () => {
   }, "adicionar receita");
 
   const handleEditarReceita = wrapAction((receita: any) => {
-    const receitaFormatada = {
-      id: receita.id,
-      descricao: receita.descricao,
-      valor: receita.valor,
-      categoria: receita.categorias?.nome || "",
-      data: receita.data,
-      tipo: "variavel" as "fixa" | "variavel",
-    };
-    setReceitaEditando(receitaFormatada);
+    setReceitaEditando(receita);
     setModalEditarAberto(true);
   }, "editar receita");
 
-  const handleSalvarEdicao = async (receitaAtualizada: Receita) => {
+  const handleSalvarEdicao = async (receitaAtualizada: any) => {
     const categoria = categoriasReceita.find(
-      (c) => c.nome === receitaAtualizada.categoria
+      (c) => c.nome === receitaAtualizada.categorias?.nome
     );
 
     await updateReceita(receitaAtualizada.id, {

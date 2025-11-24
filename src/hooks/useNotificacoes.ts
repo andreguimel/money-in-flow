@@ -32,7 +32,7 @@ export const useNotificacoes = () => {
     lembretes.forEach(lembrete => {
       if (lembrete.concluido) return;
       
-      const diasRestantes = calcularDiasRestantes(new Date(lembrete.dataVencimento));
+      const diasRestantes = calcularDiasRestantes(new Date(lembrete.data_lembrete));
       
       // Notificar lembretes que vencem hoje, amanhã ou estão vencidos
       if (diasRestantes <= 1) {
@@ -40,8 +40,8 @@ export const useNotificacoes = () => {
           id: lembrete.id,
           titulo: lembrete.titulo,
           descricao: lembrete.descricao,
-          dataVencimento: new Date(lembrete.dataVencimento),
-          prioridade: lembrete.prioridade,
+          dataVencimento: new Date(lembrete.data_lembrete),
+          prioridade: 'media', // Default since prioridade doesn't exist in Lembrete table
           diasRestantes
         });
       }

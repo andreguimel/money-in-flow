@@ -188,7 +188,7 @@ export const SpendingHeatmap: React.FC<SpendingHeatmapProps> = ({
             </div>
             <div className="text-center">
               <div className="text-lg font-bold text-orange-600">
-                {maiorPeriodo.day || maiorPeriodo.name}
+                {'day' in maiorPeriodo ? maiorPeriodo.day : maiorPeriodo.name}
               </div>
               <div className="text-xs text-muted-foreground">
                 {viewMode === "day" ? "Dia" : "Período"} preferido
@@ -202,7 +202,7 @@ export const SpendingHeatmap: React.FC<SpendingHeatmapProps> = ({
             <p className="text-sm text-blue-700">
               {viewMode === "day"
                 ? `Você gasta mais ${
-                    maiorPeriodo.value > 0
+                    maiorPeriodo.value > 0 && 'day' in maiorPeriodo
                       ? `às ${maiorPeriodo.day}s`
                       : "nos fins de semana"
                   } 
@@ -210,7 +210,7 @@ export const SpendingHeatmap: React.FC<SpendingHeatmapProps> = ({
                      (maiorPeriodo.value / totalGastos) * 100
                    )}% dos gastos)`
                 : `Seus maiores gastos acontecem ${
-                    maiorPeriodo.value > 0
+                    maiorPeriodo.value > 0 && 'name' in maiorPeriodo
                       ? `de ${maiorPeriodo.name.toLowerCase()}`
                       : "durante o dia"
                   } 

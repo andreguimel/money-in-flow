@@ -148,7 +148,7 @@ export const EditarDividaModal = ({ isOpen, onClose, divida, onSave }: EditarDiv
               <Checkbox
                 id="avisosPagamento"
                 checked={avisosPagamento}
-                onCheckedChange={setAvisosPagamento}
+                onCheckedChange={(checked) => setAvisosPagamento(checked === true)}
               />
               <Label htmlFor="avisosPagamento">
                 Receber aviso de pagamento um dia antes do vencimento
