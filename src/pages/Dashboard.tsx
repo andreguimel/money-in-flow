@@ -270,9 +270,30 @@ const Dashboard = () => {
     return colors[categoria] || "text-gray-600";
   };
 
+  // Calcular número de dias do período selecionado
+  const getDiasDoPeriodo = () => {
+    const now = new Date();
+    
+    switch (selectedPeriod) {
+      case "semana":
+        return 7;
+      case "mes":
+        // Calcular dias reais do mês atual
+        return new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+      case "ano":
+        // Calcular dias do ano (considerando ano bissexto)
+        const isLeapYear = (year: number) => 
+          (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+        return isLeapYear(now.getFullYear()) ? 366 : 365;
+      default:
+        return 30;
+    }
+  };
+
   // Calculos adicionais
   const totalTransacoes = transacoesPeriodo.length;
-  const mediaGastosDiarios = despesasPeriodo / 30;
+  const diasDoPeriodo = getDiasDoPeriodo();
+  const mediaGastosDiarios = despesasPeriodo / diasDoPeriodo;
 
   // Itens com estoque baixo
   const itensEstoqueBaixo =
