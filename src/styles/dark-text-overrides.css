@@ -1,7 +1,48 @@
-/* Override: em modo escuro, tornar text-gray-900 claro (equivalente ~ gray-200) */
-@layer utilities {
-  .dark .text-gray-900 {
-    --tw-text-opacity: 1;
-    color: rgb(229 231 235 / var(--tw-text-opacity));
-  }
+/* Overrides para melhorar contraste de cores em dark mode */
+
+/* Textos cinza ficam mais claros em dark mode */
+.dark .text-gray-900 {
+  color: hsl(var(--foreground)) !important;
+}
+
+.dark .text-gray-800 {
+  color: hsl(var(--foreground)) !important;
+}
+
+.dark .text-gray-700 {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+.dark .text-gray-600 {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+.dark .text-gray-500 {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+.dark .text-gray-400 {
+  color: hsl(var(--muted-foreground) / 0.7) !important;
+}
+
+.dark .text-gray-300 {
+  color: hsl(var(--muted-foreground) / 0.5) !important;
+}
+
+/* Backgrounds cinza ficam mais escuros em dark mode */
+.dark .bg-gray-100 {
+  background-color: hsl(var(--muted)) !important;
+}
+
+.dark .bg-gray-200 {
+  background-color: hsl(var(--muted)) !important;
+}
+
+/* Borders cinza ficam mais visíveis em dark mode */
+.dark .border-gray-200 {
+  border-color: hsl(var(--border)) !important;
+}
+
+.dark .border-gray-300 {
+  border-color: hsl(var(--border)) !important;
 }
