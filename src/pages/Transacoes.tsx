@@ -28,6 +28,7 @@ import { useProfile } from "@/hooks/useProfile";
 import { CreatedByBadge } from "@/components/CreatedByBadge";
 import { TrialStatusBanner } from "@/components/TrialStatusBanner";
 import { BasicAccessBanner } from "@/components/BasicAccessBanner";
+import { MonthSelector } from "@/components/MonthSelector";
 
 interface Transacao {
   id: string;
@@ -49,6 +50,14 @@ const Transacoes = () => {
   const [tipoFiltro, setTipoFiltro] = useState("");
   const [categoriaFiltro, setCategoriaFiltro] = useState("");
   const [usuarioFiltro, setUsuarioFiltro] = useState("");
+  const [mesFilter, setMesFilter] = useState(() => {
+    const now = new Date();
+    return String(now.getMonth() + 1).padStart(2, "0");
+  });
+  const [anoFilter, setAnoFilter] = useState(() => {
+    const now = new Date();
+    return String(now.getFullYear());
+  });
 
   const transacoesFiltradas = transacoes
     .filter((transacao) => {
@@ -68,7 +77,19 @@ const Transacoes = () => {
           !transacao.created_by_shared_user_id) ||
         transacao.created_by_shared_user_id === usuarioFiltro;
 
-      return matchDescricao && matchTipo && matchCategoria && matchUsuario;
+      // Filtro por mês e ano
+      const matchMesAno = (() => {
+        if (!mesFilter && !anoFilter) return true;
+        
+        const [transacaoAno, transacaoMes] = transacao.data.split('-');
+        
+        const matchMes = !mesFilter || transacaoMes === mesFilter;
+        const matchAno = !anoFilter || transacaoAno === anoFilter;
+        
+        return matchMes && matchAno;
+      })();
+
+      return matchDescricao && matchTipo && matchCategoria && matchUsuario && matchMesAno;
     })
     .sort(
       (a, b) =>
@@ -123,6 +144,8 @@ const Transacoes = () => {
     setTipoFiltro("");
     setCategoriaFiltro("");
     setUsuarioFiltro("");
+    setMesFilter("");
+    setAnoFilter("");
   };
 
   return (
@@ -237,6 +260,18 @@ const Transacoes = () => {
             Filtros
           </h2>
           <div className="flex flex-col space-y-4">
+            {/* Filtro por mês */}
+            <MonthSelector
+              selectedMonth={mesFilter}
+              selectedYear={anoFilter}
+              onMonthChange={setMesFilter}
+              onYearChange={setAnoFilter}
+              onClear={() => {
+                setMesFilter("");
+                setAnoFilter("");
+              }}
+            />
+            
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <Input
