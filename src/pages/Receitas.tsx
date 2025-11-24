@@ -85,8 +85,14 @@ const Receitas = () => {
   const [filtro, setFiltro] = useState("");
   const [categoriaFiltro, setCategoriaFiltro] = useState("");
   const [usuarioFiltro, setUsuarioFiltro] = useState("");
-  const [mesFilter, setMesFilter] = useState("");
-  const [anoFilter, setAnoFilter] = useState("");
+  const [mesFilter, setMesFilter] = useState(() => {
+    const now = new Date();
+    return String(now.getMonth() + 1).padStart(2, "0");
+  });
+  const [anoFilter, setAnoFilter] = useState(() => {
+    const now = new Date();
+    return String(now.getFullYear());
+  });
 
   // Estados para o modal de edição
   const [receitaEditando, setReceitaEditando] = useState<any>(null);
