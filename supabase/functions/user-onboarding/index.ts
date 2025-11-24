@@ -74,6 +74,58 @@ serve(async (req) => {
       console.log("✅ Profile created/updated successfully");
     }
 
+    // 3. Create default categories
+    console.log("📋 Creating default categories...");
+    const categoriasPadrao = [
+      // Receitas
+      { nome: "Salário", tipo: "receita", cor: "#10B981", icone: "DollarSign" },
+      { nome: "Freelance", tipo: "receita", cor: "#3B82F6", icone: "Briefcase" },
+      { nome: "Investimentos", tipo: "receita", cor: "#8B5CF6", icone: "TrendingUp" },
+      { nome: "Vendas", tipo: "receita", cor: "#F59E0B", icone: "ShoppingBag" },
+      { nome: "Aluguel Recebido", tipo: "receita", cor: "#059669", icone: "Home" },
+      // Despesas
+      { nome: "Alimentação", tipo: "despesa", cor: "#EF4444", icone: "Utensils" },
+      { nome: "Transporte", tipo: "despesa", cor: "#F97316", icone: "Car" },
+      { nome: "Moradia", tipo: "despesa", cor: "#6366F1", icone: "Home" },
+      { nome: "Saúde", tipo: "despesa", cor: "#EC4899", icone: "Heart" },
+      { nome: "Educação", tipo: "despesa", cor: "#14B8A6", icone: "BookOpen" },
+      { nome: "Lazer", tipo: "despesa", cor: "#8B5CF6", icone: "Gamepad2" },
+      { nome: "Roupas", tipo: "despesa", cor: "#F59E0B", icone: "Shirt" },
+      { nome: "Tecnologia", tipo: "despesa", cor: "#6B7280", icone: "Smartphone" },
+      { nome: "Serviços", tipo: "despesa", cor: "#84CC16", icone: "Settings" },
+      { nome: "Serviços de Streaming", tipo: "despesa", cor: "#9333EA", icone: "Film" },
+    ];
+
+    // Check if categories already exist
+    const { data: existingCategories } = await supabaseClient
+      .from("categorias")
+      .select("id")
+      .eq("user_id", userId)
+      .limit(1);
+
+    let categoriesCreated = false;
+    if (!existingCategories || existingCategories.length === 0) {
+      // Insert all categories at once using Promise.all for better performance
+      const categoryInserts = categoriasPadrao.map((categoria) =>
+        supabaseClient.from("categorias").insert({
+          ...categoria,
+          user_id: userId,
+        })
+      );
+
+      const results = await Promise.all(categoryInserts);
+      const errors = results.filter((r) => r.error);
+
+      if (errors.length > 0) {
+        console.error(`❌ ${errors.length} errors creating categories:`, errors);
+      } else {
+        console.log(`✅ ${categoriasPadrao.length} default categories created successfully`);
+        categoriesCreated = true;
+      }
+    } else {
+      console.log("ℹ️ Categories already exist, skipping creation");
+    }
+
     // 2. Create subscriber with trial
     console.log("🎯 Creating subscriber with trial...");
     const trialStart = new Date();
@@ -109,6 +161,7 @@ serve(async (req) => {
       email: userEmail,
       profileCreated: !profileError,
       subscriberCreated: !subscriberError,
+      categoriesCreated: categoriesCreated,
       trialEnd: trialEnd.toISOString(),
     };
 

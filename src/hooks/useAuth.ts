@@ -2,35 +2,55 @@ import { useState, useEffect, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import type { User, Session, AuthError } from "@supabase/supabase-js";
 
-// Função para criar categorias padrão
+// Função para criar categorias padrão (fallback do frontend)
 const createDefaultCategories = async (userId: string) => {
-  const categoriasPadrao = [
-    // Receitas
-    { nome: "Salário", tipo: "receita", cor: "#10B981", icone: "DollarSign" },
-    { nome: "Freelance", tipo: "receita", cor: "#3B82F6", icone: "Briefcase" },
-    { nome: "Investimentos", tipo: "receita", cor: "#8B5CF6", icone: "TrendingUp" },
-    { nome: "Vendas", tipo: "receita", cor: "#F59E0B", icone: "ShoppingBag" },
-    { nome: "Aluguel Recebido", tipo: "receita", cor: "#059669", icone: "Home" },
-    // Despesas
-    { nome: "Alimentação", tipo: "despesa", cor: "#EF4444", icone: "Utensils" },
-    { nome: "Transporte", tipo: "despesa", cor: "#F97316", icone: "Car" },
-    { nome: "Moradia", tipo: "despesa", cor: "#6366F1", icone: "Home" },
-    { nome: "Saúde", tipo: "despesa", cor: "#EC4899", icone: "Heart" },
-    { nome: "Educação", tipo: "despesa", cor: "#14B8A6", icone: "BookOpen" },
-    { nome: "Lazer", tipo: "despesa", cor: "#8B5CF6", icone: "Gamepad2" },
-    { nome: "Roupas", tipo: "despesa", cor: "#F59E0B", icone: "Shirt" },
-    { nome: "Tecnologia", tipo: "despesa", cor: "#6B7280", icone: "Smartphone" },
-    { nome: "Serviços", tipo: "despesa", cor: "#84CC16", icone: "Settings" },
-    { nome: "Serviços de Streaming", tipo: "despesa", cor: "#9333EA", icone: "Film" },
-  ];
-
-  for (const categoria of categoriasPadrao) {
-    await supabase
+  try {
+    // Verificar se já existem categorias
+    const { data: existingCategories } = await supabase
       .from('categorias')
-      .insert([{
-        ...categoria,
-        user_id: userId
-      }]);
+      .select('id')
+      .eq('user_id', userId)
+      .limit(1);
+
+    if (existingCategories && existingCategories.length > 0) {
+      console.log("ℹ️ Categorias já existem, pulando criação");
+      return;
+    }
+
+    const categoriasPadrao = [
+      // Receitas
+      { nome: "Salário", tipo: "receita", cor: "#10B981", icone: "DollarSign" },
+      { nome: "Freelance", tipo: "receita", cor: "#3B82F6", icone: "Briefcase" },
+      { nome: "Investimentos", tipo: "receita", cor: "#8B5CF6", icone: "TrendingUp" },
+      { nome: "Vendas", tipo: "receita", cor: "#F59E0B", icone: "ShoppingBag" },
+      { nome: "Aluguel Recebido", tipo: "receita", cor: "#059669", icone: "Home" },
+      // Despesas
+      { nome: "Alimentação", tipo: "despesa", cor: "#EF4444", icone: "Utensils" },
+      { nome: "Transporte", tipo: "despesa", cor: "#F97316", icone: "Car" },
+      { nome: "Moradia", tipo: "despesa", cor: "#6366F1", icone: "Home" },
+      { nome: "Saúde", tipo: "despesa", cor: "#EC4899", icone: "Heart" },
+      { nome: "Educação", tipo: "despesa", cor: "#14B8A6", icone: "BookOpen" },
+      { nome: "Lazer", tipo: "despesa", cor: "#8B5CF6", icone: "Gamepad2" },
+      { nome: "Roupas", tipo: "despesa", cor: "#F59E0B", icone: "Shirt" },
+      { nome: "Tecnologia", tipo: "despesa", cor: "#6B7280", icone: "Smartphone" },
+      { nome: "Serviços", tipo: "despesa", cor: "#84CC16", icone: "Settings" },
+      { nome: "Serviços de Streaming", tipo: "despesa", cor: "#9333EA", icone: "Film" },
+    ];
+
+    // Inserir todas as categorias de uma vez
+    const { error } = await supabase
+      .from('categorias')
+      .insert(
+        categoriasPadrao.map(cat => ({ ...cat, user_id: userId }))
+      );
+
+    if (error) {
+      console.error("❌ Erro ao criar categorias padrão:", error);
+    } else {
+      console.log(`✅ ${categoriasPadrao.length} categorias padrão criadas com sucesso!`);
+    }
+  } catch (error) {
+    console.error("❌ Erro inesperado ao criar categorias:", error);
   }
 };
 
