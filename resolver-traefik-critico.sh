@@ -81,7 +81,7 @@ docker run -d --name traefik-app \
   -p 8080:8080 \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
   -v /opt/traefik/acme.json:/acme.json \
-  traefik:v3.0 \
+  traefik:v3.4 \
   --api.dashboard=true \
   --api.insecure=true \
   --providers.docker=true \
