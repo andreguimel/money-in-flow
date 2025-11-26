@@ -37,9 +37,36 @@ import {
 
 const LandingPage = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [visibleMessages, setVisibleMessages] = useState<number[]>([]);
+  const [isTyping, setIsTyping] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
+    
+    // Simular conversa em tempo real
+    const messageTimings = [
+      { index: 0, delay: 500 },      // Primeira mensagem do usuário
+      { index: 1, delay: 2000 },     // Resposta do sistema (com typing)
+      { index: 2, delay: 3500 },     // Segunda mensagem do usuário
+      { index: 3, delay: 5500 },     // Resposta do sistema
+      { index: 4, delay: 7000 },     // Terceira mensagem do usuário
+      { index: 5, delay: 9000 },     // Resposta do sistema
+    ];
+
+    messageTimings.forEach(({ index, delay }) => {
+      setTimeout(() => {
+        // Mostrar typing indicator apenas para mensagens do sistema
+        if (index % 2 === 1) {
+          setIsTyping(true);
+          setTimeout(() => {
+            setIsTyping(false);
+            setVisibleMessages(prev => [...prev, index]);
+          }, 1500);
+        } else {
+          setVisibleMessages(prev => [...prev, index]);
+        }
+      }, delay);
+    });
   }, []);
 
   return (
@@ -213,80 +240,104 @@ const LandingPage = () => {
                     </div>
 
                     <div className="bg-[#ECE5DD] p-4 min-h-[500px] space-y-3">
-                      <div className="flex justify-end">
-                        <div className="max-w-[85%] rounded-lg px-4 py-2 shadow-sm bg-[#DCF8C6] text-gray-900">
-                          <p className="text-sm leading-relaxed">
-                            Recebi 100 reais de freelancer
-                          </p>
-                          <div className="text-[10px] text-gray-500 mt-1 text-right">
-                            14:32 ✓✓
+                      {visibleMessages.includes(0) && (
+                        <div className="flex justify-end animate-fade-in">
+                          <div className="max-w-[85%] rounded-lg px-4 py-2 shadow-sm bg-[#DCF8C6] text-gray-900">
+                            <p className="text-sm leading-relaxed">
+                              Recebi 100 reais de freelancer
+                            </p>
+                            <div className="text-[10px] text-gray-500 mt-1 text-right">
+                              14:32 ✓✓
+                            </div>
                           </div>
                         </div>
-                      </div>
+                      )}
 
-                      <div className="flex justify-start">
-                        <div className="max-w-[85%] rounded-lg px-4 py-2 shadow-sm bg-white text-gray-900">
-                          <p className="text-sm whitespace-pre-line leading-relaxed">
-                            ✅ Receita registrada:{'\n'}
-                            📝 Recebi 100 em um trabalho freelancer{'\n'}
-                            💰 R$ 100,00{'\n'}
-                            🏷 Freelance
-                          </p>
-                          <div className="text-[10px] text-gray-500 mt-1 text-right">
-                            14:32 ✓✓
+                      {visibleMessages.includes(1) && (
+                        <div className="flex justify-start animate-fade-in">
+                          <div className="max-w-[85%] rounded-lg px-4 py-2 shadow-sm bg-white text-gray-900">
+                            <p className="text-sm whitespace-pre-line leading-relaxed">
+                              ✅ Receita registrada:{'\n'}
+                              📝 Recebi 100 em um trabalho freelancer{'\n'}
+                              💰 R$ 100,00{'\n'}
+                              🏷 Freelance
+                            </p>
+                            <div className="text-[10px] text-gray-500 mt-1 text-right">
+                              14:32 ✓✓
+                            </div>
                           </div>
                         </div>
-                      </div>
+                      )}
 
-                      <div className="flex justify-end">
-                        <div className="max-w-[85%] rounded-lg px-4 py-2 shadow-sm bg-[#DCF8C6] text-gray-900">
-                          <p className="text-sm leading-relaxed">
-                            Gastei 45 reais no mercado
-                          </p>
-                          <div className="text-[10px] text-gray-500 mt-1 text-right">
-                            14:33 ✓✓
+                      {visibleMessages.includes(2) && (
+                        <div className="flex justify-end animate-fade-in">
+                          <div className="max-w-[85%] rounded-lg px-4 py-2 shadow-sm bg-[#DCF8C6] text-gray-900">
+                            <p className="text-sm leading-relaxed">
+                              Gastei 45 reais no mercado
+                            </p>
+                            <div className="text-[10px] text-gray-500 mt-1 text-right">
+                              14:33 ✓✓
+                            </div>
                           </div>
                         </div>
-                      </div>
+                      )}
 
-                      <div className="flex justify-start">
-                        <div className="max-w-[85%] rounded-lg px-4 py-2 shadow-sm bg-white text-gray-900">
-                          <p className="text-sm whitespace-pre-line leading-relaxed">
-                            ✅ Despesa registrada:{'\n'}
-                            📝 Compras no mercado{'\n'}
-                            💰 R$ 45,00{'\n'}
-                            🏷 Alimentação
-                          </p>
-                          <div className="text-[10px] text-gray-500 mt-1 text-right">
-                            14:33 ✓✓
+                      {visibleMessages.includes(3) && (
+                        <div className="flex justify-start animate-fade-in">
+                          <div className="max-w-[85%] rounded-lg px-4 py-2 shadow-sm bg-white text-gray-900">
+                            <p className="text-sm whitespace-pre-line leading-relaxed">
+                              ✅ Despesa registrada:{'\n'}
+                              📝 Compras no mercado{'\n'}
+                              💰 R$ 45,00{'\n'}
+                              🏷 Alimentação
+                            </p>
+                            <div className="text-[10px] text-gray-500 mt-1 text-right">
+                              14:33 ✓✓
+                            </div>
                           </div>
                         </div>
-                      </div>
+                      )}
 
-                      <div className="flex justify-end">
-                        <div className="max-w-[85%] rounded-lg px-4 py-2 shadow-sm bg-[#DCF8C6] text-gray-900">
-                          <p className="text-sm leading-relaxed">
-                            Me lembre de pagar a conta de luz dia 15
-                          </p>
-                          <div className="text-[10px] text-gray-500 mt-1 text-right">
-                            14:34 ✓✓
+                      {visibleMessages.includes(4) && (
+                        <div className="flex justify-end animate-fade-in">
+                          <div className="max-w-[85%] rounded-lg px-4 py-2 shadow-sm bg-[#DCF8C6] text-gray-900">
+                            <p className="text-sm leading-relaxed">
+                              Me lembre de pagar a conta de luz dia 15
+                            </p>
+                            <div className="text-[10px] text-gray-500 mt-1 text-right">
+                              14:34 ✓✓
+                            </div>
                           </div>
                         </div>
-                      </div>
+                      )}
 
-                      <div className="flex justify-start">
-                        <div className="max-w-[85%] rounded-lg px-4 py-2 shadow-sm bg-white text-gray-900">
-                          <p className="text-sm whitespace-pre-line leading-relaxed">
-                            ✅ Lembrete criado:{'\n'}
-                            📝 Pagar conta de luz{'\n'}
-                            📅 15 do mês atual{'\n'}
-                            🏷 Moradia
-                          </p>
-                          <div className="text-[10px] text-gray-500 mt-1 text-right">
-                            14:34 ✓✓
+                      {visibleMessages.includes(5) && (
+                        <div className="flex justify-start animate-fade-in">
+                          <div className="max-w-[85%] rounded-lg px-4 py-2 shadow-sm bg-white text-gray-900">
+                            <p className="text-sm whitespace-pre-line leading-relaxed">
+                              ✅ Lembrete criado:{'\n'}
+                              📝 Pagar conta de luz{'\n'}
+                              📅 15 do mês atual{'\n'}
+                              🏷 Moradia
+                            </p>
+                            <div className="text-[10px] text-gray-500 mt-1 text-right">
+                              14:34 ✓✓
+                            </div>
                           </div>
                         </div>
-                      </div>
+                      )}
+
+                      {isTyping && (
+                        <div className="flex justify-start animate-fade-in">
+                          <div className="bg-white rounded-lg px-4 py-3 shadow-sm">
+                            <div className="flex space-x-1">
+                              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
 
                     <div className="bg-[#F0F0F0] px-4 py-3 flex items-center gap-2">
