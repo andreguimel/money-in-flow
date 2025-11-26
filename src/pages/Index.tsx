@@ -9,12 +9,14 @@ import { FAQ } from "@/components/FAQ";
 import { Footer } from "@/components/Footer";
 import { FloatingButtons } from "@/components/FloatingButtons";
 import { WhatsAppDemo } from "@/components/WhatsAppDemo";
+import { VideoDemo } from "@/components/VideoDemo";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
       <Hero />
+      <VideoDemo />
       <WhatsAppDemo />
       <Features />
       <HowItWorks />
