@@ -1,12 +1,32 @@
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, BarChart3, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
-import { DemoVideoModal } from "@/components/DemoVideoModal";
+
+interface Message {
+  type: 'user' | 'system';
+  text: string;
+}
 
 export const Hero = () => {
-  const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
+  const messages: Message[] = [
+    {
+      type: 'user',
+      text: "Recebi 100 reais de freelancer"
+    },
+    {
+      type: 'system',
+      text: "✅ Receita registrada:\n📝 Recebi 100 em um trabalho freelancer\n💰 R$ 100,00\n🏷 Freelance"
+    },
+    {
+      type: 'user',
+      text: "Gastei 45 reais no mercado"
+    },
+    {
+      type: 'system',
+      text: "✅ Despesa registrada:\n📝 Compras no mercado\n💰 R$ 45,00\n🏷 Alimentação"
+    }
+  ];
 
   return (
     <section className="bg-gradient-to-br from-orange-50 to-white py-20">
@@ -35,22 +55,51 @@ export const Hero = () => {
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="text-lg px-8 py-4"
-              onClick={() => setIsDemoModalOpen(true)}
-            >
-              Ver Demonstração
-            </Button>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-xl p-8 mb-16">
-            <img 
-              src="https://cdn.jsdelivr.net/gh/mathuzabr/img-packtypebot/mordomo.jpg" 
-              alt="Dashboard do Mordomo"
-              className="w-full h-auto rounded-lg"
-            />
+          <div className="bg-white rounded-2xl shadow-xl overflow-hidden max-w-md mx-auto mb-16">
+            <div className="bg-[#075E54] text-white px-4 py-3 flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-2xl">
+                💰
+              </div>
+              <div>
+                <div className="font-semibold">Mordomo</div>
+                <div className="text-xs text-white/80">online</div>
+              </div>
+            </div>
+
+            <div className="bg-[#ECE5DD] p-4 min-h-[400px] space-y-3">
+              {messages.map((message, idx) => (
+                <div
+                  key={idx}
+                  className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
+                >
+                  <div
+                    className={`max-w-[85%] rounded-lg px-4 py-2 shadow-sm ${
+                      message.type === 'user'
+                        ? 'bg-[#DCF8C6] text-gray-900'
+                        : 'bg-white text-gray-900'
+                    }`}
+                  >
+                    <p className="text-sm whitespace-pre-line leading-relaxed">
+                      {message.text}
+                    </p>
+                    <div className="text-[10px] text-gray-500 mt-1 text-right">
+                      14:32 ✓✓
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="bg-[#F0F0F0] px-4 py-3 flex items-center gap-2">
+              <div className="flex-1 bg-white rounded-full px-4 py-2 text-sm text-gray-500">
+                Digite sua mensagem...
+              </div>
+              <div className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center">
+                <MessageCircle className="w-4 h-4 text-white" />
+              </div>
+            </div>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
@@ -80,11 +129,6 @@ export const Hero = () => {
           </div>
         </div>
       </div>
-
-      <DemoVideoModal 
-        isOpen={isDemoModalOpen} 
-        onClose={() => setIsDemoModalOpen(false)} 
-      />
     </section>
   );
 };
