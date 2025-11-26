@@ -39,34 +39,15 @@ const LandingPage = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [visibleMessages, setVisibleMessages] = useState<number[]>([]);
   const [isTyping, setIsTyping] = useState(false);
-  const [currentConversation, setCurrentConversation] = useState(0);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
-  const conversations = [
-    [
-      { type: 'user', text: 'Recebi 100 reais de freelancer' },
-      { type: 'system', text: '✅ Receita registrada:\n📝 Recebi 100 em um trabalho freelancer\n💰 R$ 100,00\n🏷 Freelance' },
-      { type: 'user', text: 'Gastei 45 reais no mercado' },
-      { type: 'system', text: '✅ Despesa registrada:\n📝 Compras no mercado\n💰 R$ 45,00\n🏷 Alimentação' },
-      { type: 'user', text: 'Me lembre de pagar a conta de luz dia 15' },
-      { type: 'system', text: '✅ Lembrete criado:\n📝 Pagar conta de luz\n📅 15 do mês atual\n🏷 Moradia' },
-    ],
-    [
-      { type: 'user', text: 'Paguei 350 de aluguel' },
-      { type: 'system', text: '✅ Despesa registrada:\n📝 Pagamento de aluguel\n💰 R$ 350,00\n🏷 Moradia' },
-      { type: 'user', text: 'Recebi 2500 do salário' },
-      { type: 'system', text: '✅ Receita registrada:\n📝 Salário mensal\n💰 R$ 2.500,00\n🏷 Salário' },
-      { type: 'user', text: 'Lembrar de pagar internet dia 10' },
-      { type: 'system', text: '✅ Lembrete criado:\n📝 Pagar internet\n📅 10 do mês atual\n🏷 Contas' },
-    ],
-    [
-      { type: 'user', text: 'Gastei 80 no posto de gasolina' },
-      { type: 'system', text: '✅ Despesa registrada:\n📝 Abastecimento\n💰 R$ 80,00\n🏷 Transporte' },
-      { type: 'user', text: 'Vendi um produto por 200 reais' },
-      { type: 'system', text: '✅ Receita registrada:\n📝 Venda de produto\n💰 R$ 200,00\n🏷 Vendas' },
-      { type: 'user', text: 'Me lembre de ir ao médico dia 20' },
-      { type: 'system', text: '✅ Lembrete criado:\n📝 Consulta médica\n📅 20 do mês atual\n🏷 Saúde' },
-    ],
+  const messages = [
+    { type: 'user', text: 'Recebi 100 reais de freelancer', time: '14:32' },
+    { type: 'system', text: '✅ Receita registrada:\n📝 Recebi 100 em um trabalho freelancer\n💰 R$ 100,00\n🏷 Freelance', time: '14:32' },
+    { type: 'user', text: 'Gastei 45 reais no mercado', time: '14:33' },
+    { type: 'system', text: '✅ Despesa registrada:\n📝 Compras no mercado\n💰 R$ 45,00\n🏷 Alimentação', time: '14:33' },
+    { type: 'user', text: 'Me lembre de pagar a conta de luz dia 15', time: '14:34' },
+    { type: 'system', text: '✅ Lembrete criado:\n📝 Pagar conta de luz\n📅 15 do mês atual\n🏷 Moradia', time: '14:34' },
   ];
 
   const scrollToBottom = () => {
@@ -75,27 +56,17 @@ const LandingPage = () => {
     }
   };
 
-  useEffect(() => {
-    setIsVisible(true);
-    
-    // Escolher conversa aleatória ao carregar
-    const randomIndex = Math.floor(Math.random() * conversations.length);
-    setCurrentConversation(randomIndex);
-  }, []);
-
-  useEffect(() => {
-    // Resetar mensagens ao trocar de conversa
+  const startConversation = () => {
     setVisibleMessages([]);
     setIsTyping(false);
     
-    // Simular conversa em tempo real
     const messageTimings = [
-      { index: 0, delay: 500 },
-      { index: 1, delay: 2000 },
-      { index: 2, delay: 3500 },
-      { index: 3, delay: 5500 },
-      { index: 4, delay: 7000 },
-      { index: 5, delay: 9000 },
+      { index: 0, delay: 1000 },    // 1s
+      { index: 1, delay: 4000 },    // 4s (3s depois)
+      { index: 2, delay: 7000 },    // 7s (3s depois)
+      { index: 3, delay: 10000 },   // 10s (3s depois)
+      { index: 4, delay: 13000 },   // 13s (3s depois)
+      { index: 5, delay: 16000 },   // 16s (3s depois)
     ];
 
     const timeouts: NodeJS.Timeout[] = [];
@@ -108,7 +79,7 @@ const LandingPage = () => {
             setIsTyping(false);
             setVisibleMessages(prev => [...prev, index]);
             setTimeout(scrollToBottom, 100);
-          }, 1500);
+          }, 2000);
           timeouts.push(typingTimeout);
         } else {
           setVisibleMessages(prev => [...prev, index]);
@@ -118,16 +89,22 @@ const LandingPage = () => {
       timeouts.push(timeout);
     });
 
-    // Após a última mensagem, esperar e trocar para próxima conversa
+    // Reiniciar após 20 segundos
     const loopTimeout = setTimeout(() => {
-      setCurrentConversation((prev) => (prev + 1) % conversations.length);
-    }, 11000);
+      startConversation();
+    }, 20000);
     timeouts.push(loopTimeout);
 
     return () => {
       timeouts.forEach(timeout => clearTimeout(timeout));
     };
-  }, [currentConversation]);
+  };
+
+  useEffect(() => {
+    setIsVisible(true);
+    const cleanup = startConversation();
+    return cleanup;
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-pink-50">
@@ -304,7 +281,7 @@ const LandingPage = () => {
                       className="bg-[#ECE5DD] p-4 min-h-[500px] max-h-[500px] overflow-y-auto space-y-3 scroll-smooth"
                     >
                       {visibleMessages.map((msgIndex) => {
-                        const message = conversations[currentConversation][msgIndex];
+                        const message = messages[msgIndex];
                         const isUser = message.type === 'user';
                         
                         return (
@@ -323,7 +300,7 @@ const LandingPage = () => {
                                 {message.text}
                               </p>
                               <div className="text-[10px] text-gray-500 mt-1 text-right">
-                                14:{30 + msgIndex} ✓✓
+                                {message.time} ✓✓
                               </div>
                             </div>
                           </div>
