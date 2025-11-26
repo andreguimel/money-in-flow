@@ -44,10 +44,14 @@ const LandingPage = () => {
   const messages = [
     { type: 'user', text: 'Recebi 100 reais de freelancer', time: '14:30' },
     { type: 'system', text: '✅ Receita registrada:\n📝 Recebi 100 em um trabalho freelancer\n💰 R$ 100,00\n🏷 Freelance', time: '14:30' },
-    { type: 'user', text: '📷 [Foto do comprovante]', time: '14:31', isImage: true },
-    { type: 'system', text: '✅ Despesa registrada:\n📝 Compra no supermercado\n💰 R$ 85,50\n🏷 Alimentação\n📄 Comprovante anexado', time: '14:31' },
-    { type: 'user', text: '🎤 [Áudio: "Gastei 45 reais no uber"]', time: '14:32', isAudio: true },
-    { type: 'system', text: '✅ Despesa registrada:\n📝 Corrida de Uber\n💰 R$ 45,00\n🏷 Transporte', time: '14:32' },
+    { type: 'user', text: 'Gastei 45 reais no mercado', time: '14:31' },
+    { type: 'system', text: '✅ Despesa registrada:\n📝 Compras no mercado\n💰 R$ 45,00\n🏷 Alimentação', time: '14:31' },
+    { type: 'user', text: 'Me lembre de pagar a conta de luz dia 15', time: '14:32' },
+    { type: 'system', text: '✅ Lembrete criado:\n📝 Pagar conta de luz\n📅 15 do mês atual\n🏷 Moradia', time: '14:32' },
+    { type: 'user', text: '📷', time: '14:33', isImage: true },
+    { type: 'system', text: '✅ Despesa registrada:\n📝 Combustível Posto Shell\n💰 R$ 250,00\n🏷 Transporte\n📄 Comprovante anexado', time: '14:33' },
+    { type: 'user', text: '🎤', time: '14:34', isAudio: true },
+    { type: 'system', text: '✅ Despesa registrada:\n📝 Almoço no restaurante\n💰 R$ 38,00\n🏷 Alimentação', time: '14:34' },
   ];
 
   const scrollToBottom = () => {
@@ -61,12 +65,16 @@ const LandingPage = () => {
     setIsTyping(false);
     
     const messageTimings = [
-      { index: 0, delay: 1000 },    // 1s
-      { index: 1, delay: 4000 },    // 4s (3s depois)
-      { index: 2, delay: 7000 },    // 7s (3s depois)
-      { index: 3, delay: 10000 },   // 10s (3s depois)
-      { index: 4, delay: 13000 },   // 13s (3s depois)
-      { index: 5, delay: 16000 },   // 16s (3s depois)
+      { index: 0, delay: 1000 },     // Receita texto
+      { index: 1, delay: 4000 },     // Resposta receita
+      { index: 2, delay: 7000 },     // Despesa texto
+      { index: 3, delay: 10000 },    // Resposta despesa
+      { index: 4, delay: 13000 },    // Lembrete texto
+      { index: 5, delay: 16000 },    // Resposta lembrete
+      { index: 6, delay: 19000 },    // Foto
+      { index: 7, delay: 22000 },    // Resposta foto
+      { index: 8, delay: 25000 },    // Áudio
+      { index: 9, delay: 28000 },    // Resposta áudio
     ];
 
     const timeouts: NodeJS.Timeout[] = [];
@@ -89,10 +97,10 @@ const LandingPage = () => {
       timeouts.push(timeout);
     });
 
-    // Reiniciar após 20 segundos
+    // Reiniciar após 32 segundos
     const loopTimeout = setTimeout(() => {
       startConversation();
-    }, 20000);
+    }, 32000);
     timeouts.push(loopTimeout);
 
     return () => {
@@ -298,10 +306,16 @@ const LandingPage = () => {
                             >
                               {message.isImage && (
                                 <div className="mb-2">
-                                  <div className="bg-gray-200 rounded-lg p-4 flex items-center justify-center">
-                                    <div className="text-center">
-                                      <div className="text-4xl mb-2">🧾</div>
-                                      <div className="text-xs text-gray-600">Comprovante.jpg</div>
+                                  <div className="bg-white rounded-lg overflow-hidden border border-gray-200">
+                                    <div className="bg-gradient-to-br from-orange-100 to-yellow-50 p-6 text-center">
+                                      <div className="text-xs text-gray-500 mb-2">COMPROVANTE DE PAGAMENTO</div>
+                                      <div className="text-lg font-bold text-gray-800 mb-1">POSTO SHELL</div>
+                                      <div className="text-sm text-gray-600 mb-3">Combustível - Gasolina</div>
+                                      <div className="text-2xl font-bold text-orange-600 mb-2">R$ 250,00</div>
+                                      <div className="text-xs text-gray-500">
+                                        <div>Data: 15/11/2025 - 14:30</div>
+                                        <div>Nota Fiscal: 12345678</div>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
