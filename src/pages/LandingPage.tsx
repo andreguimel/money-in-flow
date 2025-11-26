@@ -115,7 +115,8 @@ const LandingPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-pink-50">
+    <div className="light">
+      <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-pink-50">
       {/* Header/Navbar */}
       <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm border-b border-orange-100 z-50 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -854,6 +855,7 @@ const LandingPage = () => {
           </div>
         </div>
       </footer>
+    </div>
     </div>
   );
 };
