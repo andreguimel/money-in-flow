@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -40,7 +40,7 @@ const LandingPage = () => {
   const [visibleMessages, setVisibleMessages] = useState<number[]>([]);
   const [isTyping, setIsTyping] = useState(false);
   const [currentConversation, setCurrentConversation] = useState(0);
-  const chatContainerRef = useState<HTMLDivElement | null>(null)[0];
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   const conversations = [
     [
@@ -70,8 +70,8 @@ const LandingPage = () => {
   ];
 
   const scrollToBottom = () => {
-    if (chatContainerRef) {
-      chatContainerRef.scrollTop = chatContainerRef.scrollHeight;
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
   };
 
@@ -300,11 +300,7 @@ const LandingPage = () => {
                     </div>
 
                     <div 
-                      ref={(el) => {
-                        if (el) {
-                          (chatContainerRef as any) = el;
-                        }
-                      }}
+                      ref={chatContainerRef}
                       className="bg-[#ECE5DD] p-4 min-h-[500px] max-h-[500px] overflow-y-auto space-y-3 scroll-smooth"
                     >
                       {visibleMessages.map((msgIndex) => {
