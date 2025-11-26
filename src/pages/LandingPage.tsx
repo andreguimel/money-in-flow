@@ -42,12 +42,12 @@ const LandingPage = () => {
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
   const messages = [
-    { type: 'user', text: 'Recebi 100 reais de freelancer', time: '14:32' },
-    { type: 'system', text: '✅ Receita registrada:\n📝 Recebi 100 em um trabalho freelancer\n💰 R$ 100,00\n🏷 Freelance', time: '14:32' },
-    { type: 'user', text: 'Gastei 45 reais no mercado', time: '14:33' },
-    { type: 'system', text: '✅ Despesa registrada:\n📝 Compras no mercado\n💰 R$ 45,00\n🏷 Alimentação', time: '14:33' },
-    { type: 'user', text: 'Me lembre de pagar a conta de luz dia 15', time: '14:34' },
-    { type: 'system', text: '✅ Lembrete criado:\n📝 Pagar conta de luz\n📅 15 do mês atual\n🏷 Moradia', time: '14:34' },
+    { type: 'user', text: 'Recebi 100 reais de freelancer', time: '14:30' },
+    { type: 'system', text: '✅ Receita registrada:\n📝 Recebi 100 em um trabalho freelancer\n💰 R$ 100,00\n🏷 Freelance', time: '14:30' },
+    { type: 'user', text: '📷 [Foto do comprovante]', time: '14:31', isImage: true },
+    { type: 'system', text: '✅ Despesa registrada:\n📝 Compra no supermercado\n💰 R$ 85,50\n🏷 Alimentação\n📄 Comprovante anexado', time: '14:31' },
+    { type: 'user', text: '🎤 [Áudio: "Gastei 45 reais no uber"]', time: '14:32', isAudio: true },
+    { type: 'system', text: '✅ Despesa registrada:\n📝 Corrida de Uber\n💰 R$ 45,00\n🏷 Transporte', time: '14:32' },
   ];
 
   const scrollToBottom = () => {
@@ -271,7 +271,7 @@ const LandingPage = () => {
                         💰
                       </div>
                       <div>
-                        <div className="font-semibold">Mordomo</div>
+                        <div className="font-semibold">Meu Dinheiro</div>
                         <div className="text-xs text-white/80">online</div>
                       </div>
                     </div>
@@ -296,6 +296,29 @@ const LandingPage = () => {
                                   : 'bg-white text-gray-900'
                               }`}
                             >
+                              {message.isImage && (
+                                <div className="mb-2">
+                                  <div className="bg-gray-200 rounded-lg p-4 flex items-center justify-center">
+                                    <div className="text-center">
+                                      <div className="text-4xl mb-2">🧾</div>
+                                      <div className="text-xs text-gray-600">Comprovante.jpg</div>
+                                    </div>
+                                  </div>
+                                </div>
+                              )}
+                              {message.isAudio && (
+                                <div className="mb-2 flex items-center gap-2 bg-gray-100 rounded-full px-3 py-2">
+                                  <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center">
+                                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                      <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                  </div>
+                                  <div className="flex-1 h-6 bg-gray-300 rounded-full overflow-hidden">
+                                    <div className="h-full bg-green-500 w-full"></div>
+                                  </div>
+                                  <span className="text-xs text-gray-600">0:03</span>
+                                </div>
+                              )}
                               <p className="text-sm whitespace-pre-line leading-relaxed">
                                 {message.text}
                               </p>
