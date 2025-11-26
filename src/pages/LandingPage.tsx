@@ -49,7 +49,7 @@ const LandingPage = () => {
     { type: 'user', text: 'Me lembre de pagar a conta de luz dia 15', time: '14:32' },
     { type: 'system', text: '✅ Lembrete criado:\n📝 Pagar conta de luz\n📅 15 do mês atual\n🏷 Moradia', time: '14:32' },
     { type: 'user', text: '📷', time: '14:33', isImage: true },
-    { type: 'system', text: '✅ Despesa registrada:\n📝 Combustível Posto Shell\n💰 R$ 250,00\n🏷 Transporte\n📄 Comprovante anexado', time: '14:33' },
+    { type: 'system', text: '✅ Despesa registrada:\n📝 Combustível Posto Shell\n💰 R$ 250,00\n🏷 Transporte', time: '14:33' },
     { type: 'user', text: '🎤', time: '14:34', isAudio: true },
     { type: 'system', text: '✅ Despesa registrada:\n📝 Almoço no restaurante\n💰 R$ 38,00\n🏷 Alimentação', time: '14:34' },
   ];
