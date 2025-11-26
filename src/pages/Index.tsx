@@ -8,12 +8,14 @@ import { Pricing } from "@/components/Pricing";
 import { FAQ } from "@/components/FAQ";
 import { Footer } from "@/components/Footer";
 import { FloatingButtons } from "@/components/FloatingButtons";
+import { WhatsAppDemo } from "@/components/WhatsAppDemo";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
       <Hero />
+      <WhatsAppDemo />
       <Features />
       <HowItWorks />
       <Testimonials />
