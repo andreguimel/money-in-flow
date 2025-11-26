@@ -201,41 +201,100 @@ const LandingPage = () => {
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-br from-orange-200 to-pink-200 rounded-3xl transform rotate-6"></div>
                 <div className="relative bg-white rounded-3xl shadow-2xl overflow-hidden">
-                  <div className="p-8">
-                    <div className="space-y-6">
-                      <div className="flex items-center justify-between">
-                        <h3 className="text-xl font-semibold">
-                          Demonstração do Sistema
-                        </h3>
-                        <Badge className="bg-green-100 text-green-700">
-                          <PlayCircle className="h-4 w-4 mr-1" />
-                          Vídeo
-                        </Badge>
+                  <div className="bg-white rounded-2xl overflow-hidden">
+                    <div className="bg-[#075E54] text-white px-4 py-3 flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-2xl">
+                        💰
                       </div>
-
-                      <div className="relative aspect-video rounded-xl overflow-hidden bg-gray-100">
-                        <iframe
-                          src="https://www.youtube.com/embed/O22S-Pai4sA"
-                          title="Sistema MDinheiro - Tenha o controle financeiro"
-                          className="w-full h-full"
-                          frameBorder="0"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                          allowFullScreen
-                        ></iframe>
+                      <div>
+                        <div className="font-semibold">Mordomo</div>
+                        <div className="text-xs text-white/80">online</div>
                       </div>
+                    </div>
 
-                      <div className="bg-gradient-to-r from-orange-50 to-pink-50 rounded-xl p-4">
-                        <div className="flex items-center space-x-3">
-                          <PlayCircle className="h-8 w-8 text-orange-500" />
-                          <div>
-                            <p className="font-medium text-gray-800">
-                              Veja como funciona:
-                            </p>
-                            <p className="text-sm text-gray-600">
-                              Demonstração completa do sistema de controle financeiro
-                            </p>
+                    <div className="bg-[#ECE5DD] p-4 min-h-[500px] space-y-3">
+                      <div className="flex justify-end">
+                        <div className="max-w-[85%] rounded-lg px-4 py-2 shadow-sm bg-[#DCF8C6] text-gray-900">
+                          <p className="text-sm leading-relaxed">
+                            Recebi 100 reais de freelancer
+                          </p>
+                          <div className="text-[10px] text-gray-500 mt-1 text-right">
+                            14:32 ✓✓
                           </div>
                         </div>
+                      </div>
+
+                      <div className="flex justify-start">
+                        <div className="max-w-[85%] rounded-lg px-4 py-2 shadow-sm bg-white text-gray-900">
+                          <p className="text-sm whitespace-pre-line leading-relaxed">
+                            ✅ Receita registrada:{'\n'}
+                            📝 Recebi 100 em um trabalho freelancer{'\n'}
+                            💰 R$ 100,00{'\n'}
+                            🏷 Freelance
+                          </p>
+                          <div className="text-[10px] text-gray-500 mt-1 text-right">
+                            14:32 ✓✓
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex justify-end">
+                        <div className="max-w-[85%] rounded-lg px-4 py-2 shadow-sm bg-[#DCF8C6] text-gray-900">
+                          <p className="text-sm leading-relaxed">
+                            Gastei 45 reais no mercado
+                          </p>
+                          <div className="text-[10px] text-gray-500 mt-1 text-right">
+                            14:33 ✓✓
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex justify-start">
+                        <div className="max-w-[85%] rounded-lg px-4 py-2 shadow-sm bg-white text-gray-900">
+                          <p className="text-sm whitespace-pre-line leading-relaxed">
+                            ✅ Despesa registrada:{'\n'}
+                            📝 Compras no mercado{'\n'}
+                            💰 R$ 45,00{'\n'}
+                            🏷 Alimentação
+                          </p>
+                          <div className="text-[10px] text-gray-500 mt-1 text-right">
+                            14:33 ✓✓
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex justify-end">
+                        <div className="max-w-[85%] rounded-lg px-4 py-2 shadow-sm bg-[#DCF8C6] text-gray-900">
+                          <p className="text-sm leading-relaxed">
+                            Me lembre de pagar a conta de luz dia 15
+                          </p>
+                          <div className="text-[10px] text-gray-500 mt-1 text-right">
+                            14:34 ✓✓
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex justify-start">
+                        <div className="max-w-[85%] rounded-lg px-4 py-2 shadow-sm bg-white text-gray-900">
+                          <p className="text-sm whitespace-pre-line leading-relaxed">
+                            ✅ Lembrete criado:{'\n'}
+                            📝 Pagar conta de luz{'\n'}
+                            📅 15 do mês atual{'\n'}
+                            🏷 Moradia
+                          </p>
+                          <div className="text-[10px] text-gray-500 mt-1 text-right">
+                            14:34 ✓✓
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-[#F0F0F0] px-4 py-3 flex items-center gap-2">
+                      <div className="flex-1 bg-white rounded-full px-4 py-2 text-sm text-gray-500">
+                        Digite sua mensagem...
+                      </div>
+                      <div className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center">
+                        <Smartphone className="w-4 h-4 text-white" />
                       </div>
                     </div>
                   </div>
@@ -263,6 +322,58 @@ const LandingPage = () => {
                 <div className="text-gray-600 mt-2">{stat.label}</div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Video Demo Section */}
+      <section className="py-20 bg-gradient-to-br from-orange-50 to-pink-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center space-y-4 mb-12">
+            <Badge className="bg-orange-100 text-orange-700 px-4 py-2">
+              <PlayCircle className="h-4 w-4 mr-2 inline" />
+              Demonstração do Sistema
+            </Badge>
+            <h2 className="text-4xl lg:text-5xl font-bold">
+              Veja o{" "}
+              <span className="bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent">
+                Mordomo em ação
+              </span>
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Assista à demonstração completa e descubra como o Mordomo pode transformar a gestão das suas finanças
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-200 to-pink-200 rounded-3xl transform rotate-3"></div>
+              <div className="relative bg-white rounded-3xl shadow-2xl overflow-hidden">
+                <div className="aspect-video">
+                  <iframe
+                    src="https://www.youtube.com/embed/O22S-Pai4sA"
+                    title="Sistema MDinheiro - Tenha o controle financeiro"
+                    className="w-full h-full"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+                <div className="bg-gradient-to-r from-orange-50 to-pink-50 p-6">
+                  <div className="flex items-center space-x-3">
+                    <PlayCircle className="h-8 w-8 text-orange-500" />
+                    <div>
+                      <p className="font-medium text-gray-800">
+                        Veja como funciona:
+                      </p>
+                      <p className="text-sm text-gray-600">
+                        Demonstração completa do sistema de controle financeiro
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
