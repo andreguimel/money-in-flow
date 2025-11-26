@@ -119,14 +119,14 @@ const LandingPage = () => {
       <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-pink-50">
       {/* Header/Navbar */}
       <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm border-b border-orange-100 z-50 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center justify-center space-x-2">
-              <div className="rounded-lg p-2 w-full max-w-sm">
+        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
+          <div className="flex justify-between items-center h-14 sm:h-16">
+            <div className="flex items-center justify-center">
+              <div className="rounded-lg p-1 sm:p-2 w-32 sm:w-40">
                 <img
                   src="/lovable-uploads/b9870db5-5510-4f26-a060-487dcd4bac35.png"
                   alt="Meu Dinheiro"
-                  className="h-auto w-full max-h-20 sm:max-h-20 mx-auto object-contain"
+                  className="h-auto w-full max-h-12 sm:max-h-20 mx-auto object-contain"
                 />
               </div>
             </div>
@@ -150,18 +150,22 @@ const LandingPage = () => {
                 Depoimentos
               </a>
             </div>
-            <div className="flex space-x-4">
+            <div className="flex space-x-2 sm:space-x-4">
               <Link to="/login">
                 <Button
                   variant="outline"
-                  className="border-orange-300 text-orange-600 hover:bg-orange-50"
+                  size="sm"
+                  className="border-orange-300 text-orange-600 hover:bg-orange-50 text-xs sm:text-sm px-2 sm:px-4"
                 >
                   Entrar
                 </Button>
               </Link>
               <Link to="/login">
-                <Button className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white shadow-lg">
-                  Começar Agora
+                <Button 
+                  size="sm"
+                  className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white shadow-lg text-xs sm:text-sm px-2 sm:px-4"
+                >
+                  Começar
                 </Button>
               </Link>
             </div>
@@ -170,9 +174,9 @@ const LandingPage = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
+      <section className="pt-16 sm:pt-20 lg:pt-24 pb-8 sm:pb-12 lg:pb-16 px-3 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
             <div
               className={`space-y-8 transition-all duration-1000 ${
                 isVisible
@@ -180,73 +184,72 @@ const LandingPage = () => {
                   : "opacity-0 translate-y-10"
               }`}
             >
-              <div className="space-y-4">
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <Badge className="bg-gradient-to-r from-orange-100 to-pink-100 text-orange-700 border-orange-200 px-4 py-2">
-                    <Zap className="h-4 w-4 mr-2" />
+              <div className="space-y-4 sm:space-y-6">
+                <div className="flex flex-col gap-2 sm:gap-3">
+                  <Badge className="bg-gradient-to-r from-orange-100 to-pink-100 text-orange-700 border-orange-200 px-3 py-1.5 text-xs sm:text-sm w-fit">
+                    <Zap className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                     IA Revolucionária para Finanças
                   </Badge>
-                  <Badge className="bg-gradient-to-r from-green-100 to-emerald-100 text-green-700 border-green-200 px-4 py-2">
-                    <CheckCircle className="h-4 w-4 mr-2" />7 Dias Grátis - Sem
-                    Cartão
+                  <Badge className="bg-gradient-to-r from-green-100 to-emerald-100 text-green-700 border-green-200 px-3 py-1.5 text-xs sm:text-sm w-fit">
+                    <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />7 Dias Grátis - Sem Cartão
                   </Badge>
                 </div>
-                <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
                   Transforme sua{" "}
                   <span className="bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent">
                     Vida Financeira
                   </span>
                 </h1>
-                <p className="text-xl text-gray-600 leading-relaxed">
+                <p className="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed">
                   O único sistema que combina gestão financeira avançada com IA
                   para maximizar seus resultados. Controle total, insights
                   inteligentes e crescimento garantido.
                 </p>
-                <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg p-4">
-                  <p className="text-green-800 font-semibold text-lg">
+                <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg p-3 sm:p-4">
+                  <p className="text-green-800 font-semibold text-sm sm:text-base lg:text-lg">
                     🎉 Experimente GRÁTIS por 7 dias - Sem compromisso, sem
                     cartão de crédito!
                   </p>
-                  <p className="text-green-600 text-sm mt-1">
+                  <p className="text-green-600 text-xs sm:text-sm mt-1">
                     Acesso completo a todas as funcionalidades premium
                   </p>
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/login">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                <Link to="/login" className="w-full sm:w-auto">
                   <Button
                     size="lg"
-                    className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white shadow-xl text-lg px-8 py-4 w-full sm:w-auto group"
+                    className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white shadow-xl text-sm sm:text-base lg:text-lg px-6 sm:px-8 py-3 sm:py-4 w-full group"
                   >
                     Começar Teste Grátis
-                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
                 <Button
                   variant="outline"
                   size="lg"
-                  className="border-2 border-orange-300 text-orange-600 hover:bg-orange-50 text-lg px-8 py-4 w-full sm:w-auto"
+                  className="border-2 border-orange-300 text-orange-600 hover:bg-orange-50 text-sm sm:text-base lg:text-lg px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto"
                   onClick={() =>
                     window.open("https://youtu.be/KTcGR6-sbkw", "_blank")
                   }
                 >
-                  <PlayCircle className="mr-2 h-5 w-5" />
+                  <PlayCircle className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                   Ver Demo
                 </Button>
               </div>
 
-              <div className="flex items-center space-x-8 pt-4">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6 lg:gap-8 pt-4">
                 <div className="flex items-center space-x-2">
                   <div className="flex -space-x-2">
                     {[1, 2, 3, 4].map((i) => (
                       <div
                         key={i}
-                        className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-400 to-pink-400 border-2 border-white"
+                        className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-orange-400 to-pink-400 border-2 border-white"
                       ></div>
                     ))}
                   </div>
-                  <span className="text-sm text-gray-600">
+                  <span className="text-xs sm:text-sm text-gray-600">
                     +5.000 usuários ativos
                   </span>
                 </div>
@@ -254,10 +257,10 @@ const LandingPage = () => {
                   {[1, 2, 3, 4, 5].map((i) => (
                     <Star
                       key={i}
-                      className="h-4 w-4 fill-orange-400 text-orange-400"
+                      className="h-3 w-3 sm:h-4 sm:w-4 fill-orange-400 text-orange-400"
                     />
                   ))}
-                  <span className="text-sm text-gray-600 ml-2">
+                  <span className="text-xs sm:text-sm text-gray-600 ml-2">
                     4.9/5 (247 avaliações)
                   </span>
                 </div>
@@ -271,23 +274,23 @@ const LandingPage = () => {
                   : "opacity-0 translate-y-10"
               }`}
             >
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-200 to-pink-200 rounded-3xl transform rotate-6"></div>
-                <div className="relative bg-white rounded-3xl shadow-2xl overflow-hidden">
-                  <div className="bg-white rounded-2xl overflow-hidden">
-                    <div className="bg-[#075E54] text-white px-4 py-3 flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-2xl">
+              <div className="relative mt-6 lg:mt-0">
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-200 to-pink-200 rounded-2xl sm:rounded-3xl transform rotate-3 sm:rotate-6"></div>
+                <div className="relative bg-white rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden">
+                  <div className="bg-white rounded-xl sm:rounded-2xl overflow-hidden">
+                    <div className="bg-[#075E54] text-white px-3 sm:px-4 py-2 sm:py-3 flex items-center gap-2 sm:gap-3">
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/20 flex items-center justify-center text-xl sm:text-2xl">
                         💰
                       </div>
                       <div>
-                        <div className="font-semibold">Meu Dinheiro</div>
-                        <div className="text-xs text-white/80">online</div>
+                        <div className="font-semibold text-sm sm:text-base">Meu Dinheiro</div>
+                        <div className="text-[10px] sm:text-xs text-white/80">online</div>
                       </div>
                     </div>
 
                     <div 
                       ref={chatContainerRef}
-                      className="bg-[#ECE5DD] p-4 min-h-[500px] max-h-[500px] overflow-y-auto space-y-3 scroll-smooth"
+                      className="bg-[#ECE5DD] p-3 sm:p-4 min-h-[400px] sm:min-h-[450px] lg:min-h-[500px] max-h-[400px] sm:max-h-[450px] lg:max-h-[500px] overflow-y-auto space-y-2 sm:space-y-3 scroll-smooth"
                     >
                       {visibleMessages.map((msgIndex) => {
                         const message = messages[msgIndex];
@@ -299,7 +302,7 @@ const LandingPage = () => {
                             className={`flex ${isUser ? 'justify-end' : 'justify-start'} animate-fade-in`}
                           >
                             <div
-                              className={`max-w-[85%] rounded-lg px-4 py-2 shadow-sm ${
+                              className={`max-w-[85%] sm:max-w-[80%] rounded-lg px-3 sm:px-4 py-2 shadow-sm ${
                                 isUser
                                   ? 'bg-[#DCF8C6] text-gray-900'
                                   : 'bg-white text-gray-900'
@@ -308,12 +311,12 @@ const LandingPage = () => {
                               {message.isImage && (
                                 <div className="mb-2">
                                   <div className="bg-white rounded-lg overflow-hidden border border-gray-200">
-                                    <div className="bg-gradient-to-br from-orange-100 to-yellow-50 p-6 text-center">
-                                      <div className="text-xs text-gray-500 mb-2">COMPROVANTE DE PAGAMENTO</div>
-                                      <div className="text-lg font-bold text-gray-800 mb-1">POSTO SHELL</div>
-                                      <div className="text-sm text-gray-600 mb-3">Combustível - Gasolina</div>
-                                      <div className="text-2xl font-bold text-orange-600 mb-2">R$ 250,00</div>
-                                      <div className="text-xs text-gray-500">
+                                    <div className="bg-gradient-to-br from-orange-100 to-yellow-50 p-3 sm:p-4 lg:p-6 text-center">
+                                      <div className="text-[10px] sm:text-xs text-gray-500 mb-1 sm:mb-2">COMPROVANTE DE PAGAMENTO</div>
+                                      <div className="text-sm sm:text-base lg:text-lg font-bold text-gray-800 mb-1">POSTO SHELL</div>
+                                      <div className="text-xs sm:text-sm text-gray-600 mb-2 sm:mb-3">Combustível - Gasolina</div>
+                                      <div className="text-lg sm:text-xl lg:text-2xl font-bold text-orange-600 mb-1 sm:mb-2">R$ 250,00</div>
+                                      <div className="text-[10px] sm:text-xs text-gray-500">
                                         <div>Data: 15/11/2025 - 14:30</div>
                                         <div>Nota Fiscal: 12345678</div>
                                       </div>
@@ -322,22 +325,22 @@ const LandingPage = () => {
                                 </div>
                               )}
                               {message.isAudio && (
-                                <div className="mb-2 flex items-center gap-2 bg-gray-100 rounded-full px-3 py-2">
-                                  <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center">
-                                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <div className="mb-2 flex items-center gap-1.5 sm:gap-2 bg-gray-100 rounded-full px-2 sm:px-3 py-1.5 sm:py-2">
+                                  <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
+                                    <svg className="w-3 h-3 sm:w-4 sm:h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
                                       <path d="M8 5v14l11-7z"/>
                                     </svg>
                                   </div>
-                                  <div className="flex-1 h-6 bg-gray-300 rounded-full overflow-hidden">
+                                  <div className="flex-1 h-4 sm:h-6 bg-gray-300 rounded-full overflow-hidden">
                                     <div className="h-full bg-green-500 w-full"></div>
                                   </div>
-                                  <span className="text-xs text-gray-600">0:03</span>
+                                  <span className="text-[10px] sm:text-xs text-gray-600">0:03</span>
                                 </div>
                               )}
-                              <p className="text-sm whitespace-pre-line leading-relaxed">
+                              <p className="text-xs sm:text-sm whitespace-pre-line leading-relaxed">
                                 {message.text}
                               </p>
-                              <div className="text-[10px] text-gray-500 mt-1 text-right">
+                              <div className="text-[9px] sm:text-[10px] text-gray-500 mt-1 text-right">
                                 {message.time} ✓✓
                               </div>
                             </div>
@@ -358,12 +361,12 @@ const LandingPage = () => {
                       )}
                     </div>
 
-                    <div className="bg-[#F0F0F0] px-4 py-3 flex items-center gap-2">
-                      <div className="flex-1 bg-white rounded-full px-4 py-2 text-sm text-gray-500">
+                    <div className="bg-[#F0F0F0] px-3 sm:px-4 py-2 sm:py-3 flex items-center gap-2">
+                      <div className="flex-1 bg-white rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-500">
                         Digite sua mensagem...
                       </div>
-                      <div className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center">
-                        <Smartphone className="w-4 h-4 text-white" />
+                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-orange-500 flex items-center justify-center flex-shrink-0">
+                        <Smartphone className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" />
                       </div>
                     </div>
                   </div>
@@ -375,9 +378,9 @@ const LandingPage = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-white">
+      <section className="py-8 sm:py-12 lg:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             {[
               { number: "5.000+", label: "Usuários Ativos" },
               { number: "R$ 50M+", label: "Gerenciado" },
@@ -385,10 +388,10 @@ const LandingPage = () => {
               { number: "Premium", label: "Plataforma" },
             ].map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent">
                   {stat.number}
                 </div>
-                <div className="text-gray-600 mt-2">{stat.label}</div>
+                <div className="text-sm sm:text-base text-gray-600 mt-1 sm:mt-2">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -396,28 +399,28 @@ const LandingPage = () => {
       </section>
 
       {/* Video Demo Section */}
-      <section className="py-20 bg-gradient-to-br from-orange-50 to-pink-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-12">
-            <Badge className="bg-orange-100 text-orange-700 px-4 py-2">
-              <PlayCircle className="h-4 w-4 mr-2 inline" />
+      <section className="py-10 sm:py-16 lg:py-20 bg-gradient-to-br from-orange-50 to-pink-50">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="text-center space-y-3 sm:space-y-4 mb-8 sm:mb-12">
+            <Badge className="bg-orange-100 text-orange-700 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm">
+              <PlayCircle className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 inline" />
               Demonstração do Sistema
             </Badge>
-            <h2 className="text-4xl lg:text-5xl font-bold">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold px-2">
               Veja o{" "}
               <span className="bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent">
                 Mordomo em ação
               </span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-sm sm:text-base lg:text-xl text-gray-600 max-w-3xl mx-auto px-2">
               Assista à demonstração completa e descubra como o Mordomo pode transformar a gestão das suas finanças
             </p>
           </div>
 
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-4xl mx-auto px-2">
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-orange-200 to-pink-200 rounded-3xl transform rotate-3"></div>
-              <div className="relative bg-white rounded-3xl shadow-2xl overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-200 to-pink-200 rounded-2xl sm:rounded-3xl transform rotate-2 sm:rotate-3"></div>
+              <div className="relative bg-white rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden">
                 <div className="aspect-video">
                   <iframe
                     src="https://www.youtube.com/embed/O22S-Pai4sA"
@@ -428,14 +431,14 @@ const LandingPage = () => {
                     allowFullScreen
                   ></iframe>
                 </div>
-                <div className="bg-gradient-to-r from-orange-50 to-pink-50 p-6">
-                  <div className="flex items-center space-x-3">
-                    <PlayCircle className="h-8 w-8 text-orange-500" />
+                <div className="bg-gradient-to-r from-orange-50 to-pink-50 p-3 sm:p-4 lg:p-6">
+                  <div className="flex items-center space-x-2 sm:space-x-3">
+                    <PlayCircle className="h-6 w-6 sm:h-8 sm:w-8 text-orange-500 flex-shrink-0" />
                     <div>
-                      <p className="font-medium text-gray-800">
+                      <p className="font-medium text-gray-800 text-sm sm:text-base">
                         Veja como funciona:
                       </p>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-xs sm:text-sm text-gray-600">
                         Demonstração completa do sistema de controle financeiro
                       </p>
                     </div>
@@ -450,27 +453,27 @@ const LandingPage = () => {
       {/* Features Section */}
       <section
         id="recursos"
-        className="py-20 bg-gradient-to-br from-gray-50 to-orange-50"
+        className="py-10 sm:py-16 lg:py-20 bg-gradient-to-br from-gray-50 to-orange-50"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <Badge className="bg-orange-100 text-orange-700 px-4 py-2">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="text-center space-y-3 sm:space-y-4 mb-10 sm:mb-16">
+            <Badge className="bg-orange-100 text-orange-700 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm">
               Recursos Avançados
             </Badge>
-            <h2 className="text-4xl lg:text-5xl font-bold">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold px-2">
               Tudo que você precisa para{" "}
               <span className="bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent">
                 prosperar financeiramente
               </span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-sm sm:text-base lg:text-xl text-gray-600 max-w-3xl mx-auto px-2">
               Sistema completo de gestão financeira com recursos únicos para
               controlar suas finanças pessoais e empresariais de forma
               inteligente.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {[
               {
                 icon: BarChart3,
@@ -561,18 +564,18 @@ const LandingPage = () => {
                 key={index}
                 className="group hover:shadow-xl transition-all duration-300 border-0 bg-white/80 backdrop-blur-sm"
               >
-                <CardContent className="p-8">
+                <CardContent className="p-4 sm:p-6 lg:p-8">
                   <div
-                    className={`w-16 h-16 rounded-2xl bg-gradient-to-br from-${feature.color}-100 to-${feature.color}-200 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
+                    className={`w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-xl sm:rounded-2xl bg-gradient-to-br from-${feature.color}-100 to-${feature.color}-200 flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300`}
                   >
                     <feature.icon
-                      className={`h-8 w-8 text-${feature.color}-600`}
+                      className={`h-6 w-6 sm:h-7 sm:w-7 lg:h-8 lg:w-8 text-${feature.color}-600`}
                     />
                   </div>
-                  <h3 className="text-xl font-bold mb-4 group-hover:text-orange-600 transition-colors">
+                  <h3 className="text-base sm:text-lg lg:text-xl font-bold mb-2 sm:mb-4 group-hover:text-orange-600 transition-colors">
                     {feature.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                     {feature.description}
                   </p>
                 </CardContent>
@@ -583,46 +586,46 @@ const LandingPage = () => {
       </section>
 
       {/* Pricing Section */}
-      <section id="preco" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <Badge className="bg-green-100 text-green-700 px-4 py-2">
+      <section id="preco" className="py-10 sm:py-16 lg:py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="text-center space-y-3 sm:space-y-4 mb-10 sm:mb-16">
+            <Badge className="bg-green-100 text-green-700 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm">
               Preço Justo
             </Badge>
-            <h2 className="text-4xl lg:text-5xl font-bold">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold px-2">
               Invista no seu{" "}
               <span className="bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent">
                 futuro financeiro
               </span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base lg:text-xl text-gray-600 max-w-2xl mx-auto px-2">
               Um investimento pequeno que gera retornos enormes. Pague menos do
               que você gasta em um almoço por semana.
             </p>
           </div>
 
-          <div className="max-w-lg mx-auto">
+          <div className="max-w-lg mx-auto px-2">
             <Card className="relative overflow-hidden border-2 border-orange-200 shadow-2xl">
               <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-orange-500 to-pink-500"></div>
 
-              <CardContent className="p-8 text-center">
-                <div className="space-y-6">
+              <CardContent className="p-4 sm:p-6 lg:p-8 text-center">
+                <div className="space-y-4 sm:space-y-6">
                   <div>
-                    <Badge className="bg-gradient-to-r from-orange-100 to-pink-100 text-orange-700 px-4 py-2 mb-4">
-                      <Award className="h-4 w-4 mr-2" />
+                    <Badge className="bg-gradient-to-r from-orange-100 to-pink-100 text-orange-700 px-3 sm:px-4 py-1.5 sm:py-2 mb-3 sm:mb-4 text-xs sm:text-sm">
+                      <Award className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                       Mais Popular
                     </Badge>
-                    <h3 className="text-2xl font-bold mb-2">Plano Premium</h3>
+                    <h3 className="text-xl sm:text-2xl font-bold mb-2">Plano Premium</h3>
                     <div className="flex items-center justify-center space-x-2">
-                      <span className="text-4xl font-bold">R$ 39,90</span>
-                      <span className="text-gray-500">/mês</span>
+                      <span className="text-3xl sm:text-4xl font-bold">R$ 39,90</span>
+                      <span className="text-sm sm:text-base text-gray-500">/mês</span>
                     </div>
-                    <p className="text-sm text-gray-500 mt-2">
+                    <p className="text-xs sm:text-sm text-gray-500 mt-2">
                       Apenas R$ 1,33 por dia
                     </p>
                   </div>
 
-                  <div className="space-y-4 text-left">
+                  <div className="space-y-3 sm:space-y-4 text-left">
                     {[
                       "Lembretes",
                       "Dashboard Avançado",
@@ -635,31 +638,31 @@ const LandingPage = () => {
                       "Controle de Usuários",
                       "Relatórios Detalhados",
                     ].map((feature, index) => (
-                      <div key={index} className="flex items-center space-x-3">
-                        <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
-                        <span className="text-gray-700">{feature}</span>
+                      <div key={index} className="flex items-center space-x-2 sm:space-x-3">
+                        <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-green-500 flex-shrink-0" />
+                        <span className="text-sm sm:text-base text-gray-700">{feature}</span>
                       </div>
                     ))}
                   </div>
 
-                  <div className="space-y-4">
-                    <Link to="/login">
+                  <div className="space-y-3 sm:space-y-4">
+                    <Link to="/login" className="block">
                       <Button
                         size="lg"
-                        className="w-full bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white shadow-xl text-lg py-4 group"
+                        className="w-full bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white shadow-xl text-base sm:text-lg py-3 sm:py-4 group"
                       >
                         Começar Agora
-                        <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                        <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
                       </Button>
                     </Link>
 
-                    <div className="flex items-center justify-center space-x-4 text-sm text-gray-500">
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-500">
                       <div className="flex items-center space-x-1">
-                        <Shield className="h-4 w-4" />
+                        <Shield className="h-3 w-3 sm:h-4 sm:w-4" />
                         <span>Cancele a qualquer momento</span>
                       </div>
                       <div className="flex items-center space-x-1">
-                        <Clock className="h-4 w-4" />
+                        <Clock className="h-3 w-3 sm:h-4 sm:w-4" />
                         <span>Acesso imediato</span>
                       </div>
                     </div>
@@ -674,14 +677,14 @@ const LandingPage = () => {
       {/* Testimonials Section */}
       <section
         id="depoimentos"
-        className="py-20 bg-gradient-to-br from-orange-50 to-pink-50"
+        className="py-10 sm:py-16 lg:py-20 bg-gradient-to-br from-orange-50 to-pink-50"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <Badge className="bg-blue-100 text-blue-700 px-4 py-2">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="text-center space-y-3 sm:space-y-4 mb-10 sm:mb-16">
+            <Badge className="bg-blue-100 text-blue-700 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm">
               Depoimentos
             </Badge>
-            <h2 className="text-4xl lg:text-5xl font-bold">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold px-2">
               O que nossos{" "}
               <span className="bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent">
                 usuários dizem
@@ -689,7 +692,7 @@ const LandingPage = () => {
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {[
               {
                 name: "Maria Silva",
@@ -720,33 +723,33 @@ const LandingPage = () => {
                 key={index}
                 className="bg-white/80 backdrop-blur-sm border-0 shadow-lg"
               >
-                <CardContent className="p-8">
-                  <div className="space-y-6">
+                <CardContent className="p-4 sm:p-6 lg:p-8">
+                  <div className="space-y-4 sm:space-y-6">
                     <div className="flex items-center space-x-1">
                       {[...Array(testimonial.rating)].map((_, i) => (
                         <Star
                           key={i}
-                          className="h-5 w-5 fill-orange-400 text-orange-400"
+                          className="h-4 w-4 sm:h-5 sm:w-5 fill-orange-400 text-orange-400"
                         />
                       ))}
                     </div>
 
                     <div className="relative">
-                      <Quote className="absolute top-0 left-0 h-8 w-8 text-orange-200 -translate-x-2 -translate-y-2" />
-                      <p className="text-gray-700 leading-relaxed italic">
+                      <Quote className="absolute top-0 left-0 h-6 w-6 sm:h-8 sm:w-8 text-orange-200 -translate-x-1 sm:-translate-x-2 -translate-y-1 sm:-translate-y-2" />
+                      <p className="text-sm sm:text-base text-gray-700 leading-relaxed italic pl-4 sm:pl-0">
                         "{testimonial.content}"
                       </p>
                     </div>
 
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 to-pink-400 flex items-center justify-center text-white font-bold">
+                    <div className="flex items-center space-x-3 sm:space-x-4">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-orange-400 to-pink-400 flex items-center justify-center text-white font-bold text-sm sm:text-base flex-shrink-0">
                         {testimonial.avatar}
                       </div>
                       <div>
-                        <div className="font-semibold text-gray-800">
+                        <div className="font-semibold text-gray-800 text-sm sm:text-base">
                           {testimonial.name}
                         </div>
-                        <div className="text-sm text-gray-500">
+                        <div className="text-xs sm:text-sm text-gray-500">
                           {testimonial.role}
                         </div>
                       </div>
@@ -760,40 +763,40 @@ const LandingPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-orange-600 to-pink-600 text-white">
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <div className="space-y-8">
-            <h2 className="text-4xl lg:text-5xl font-bold">
+      <section className="py-10 sm:py-16 lg:py-20 bg-gradient-to-r from-orange-600 to-pink-600 text-white">
+        <div className="max-w-4xl mx-auto text-center px-3 sm:px-6 lg:px-8">
+          <div className="space-y-6 sm:space-y-8">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold px-2">
               Pronto para transformar sua vida financeira?
             </h2>
-            <p className="text-xl opacity-90 max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base lg:text-xl opacity-90 max-w-2xl mx-auto px-2">
               Junte-se a milhares de pessoas que já descobriram o poder da IA
               para multiplicar seus resultados financeiros.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/login">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-2">
+              <Link to="/login" className="w-full sm:w-auto">
                 <Button
                   size="lg"
-                  className="bg-white text-orange-600 hover:bg-gray-100 shadow-xl text-lg px-8 py-4 w-full sm:w-auto group"
+                  className="w-full bg-white text-orange-600 hover:bg-gray-100 shadow-xl text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 group"
                 >
                   Começar Agora
-                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-8 pt-8 text-sm opacity-75">
-              <div className="flex items-center space-x-2">
-                <CheckCircle className="h-4 w-4" />
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 pt-6 sm:pt-8 text-xs sm:text-sm opacity-75 px-2">
+              <div className="flex items-center justify-center space-x-2">
+                <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
                 <span>Sem compromisso</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <CheckCircle className="h-4 w-4" />
+              <div className="flex items-center justify-center space-x-2">
+                <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
                 <span>Cancele quando quiser</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <CheckCircle className="h-4 w-4" />
+              <div className="flex items-center justify-center space-x-2">
+                <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
                 <span>Acesso imediato</span>
               </div>
             </div>
@@ -802,26 +805,26 @@ const LandingPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div className="space-y-4">
+      <footer className="bg-gray-900 text-white py-8 sm:py-10 lg:py-12">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+            <div className="col-span-2 sm:col-span-1 space-y-3 sm:space-y-4">
               <div className="flex items-center space-x-2">
                 <div className="rounded-lg p-2">
-                  <div className="text-xl font-bold bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent">
+                  <div className="text-base sm:text-lg lg:text-xl font-bold bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent">
                     Meu Dinheiro
                   </div>
                 </div>
               </div>
-              <p className="text-gray-400 text-sm">
+              <p className="text-gray-400 text-xs sm:text-sm">
                 Transformando vidas através da inteligência artificial
                 financeira.
               </p>
             </div>
 
             <div>
-              <h4 className="font-semibold mb-4">Produto</h4>
-              <div className="space-y-2 text-sm text-gray-400">
+              <h4 className="font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Produto</h4>
+              <div className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-gray-400">
                 <div>Recursos</div>
                 <div>Preços</div>
                 <div>Segurança</div>
@@ -830,8 +833,8 @@ const LandingPage = () => {
             </div>
 
             <div>
-              <h4 className="font-semibold mb-4">Suporte</h4>
-              <div className="space-y-2 text-sm text-gray-400">
+              <h4 className="font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Suporte</h4>
+              <div className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-gray-400">
                 <div>Central de Ajuda</div>
                 <div>Contato</div>
                 <div>Status</div>
@@ -840,8 +843,8 @@ const LandingPage = () => {
             </div>
 
             <div>
-              <h4 className="font-semibold mb-4">Empresa</h4>
-              <div className="space-y-2 text-sm text-gray-400">
+              <h4 className="font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Empresa</h4>
+              <div className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-gray-400">
                 <div>Sobre</div>
                 <div>Blog</div>
                 <div>Carreiras</div>
@@ -850,7 +853,7 @@ const LandingPage = () => {
             </div>
           </div>
 
-          <div className="border-t border-gray-800 mt-12 pt-8 text-center text-sm text-gray-400">
+          <div className="border-t border-gray-800 mt-8 sm:mt-10 lg:mt-12 pt-6 sm:pt-8 text-center text-xs sm:text-sm text-gray-400">
             <p>&copy; 2025 Meu Dinheiro. Todos os direitos reservados.</p>
           </div>
         </div>
